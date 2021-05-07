@@ -1,0 +1,14 @@
+{
+  "name": "station-bot",
+  "version": "1.0.0",
+  "description": "Bot for stationaryStation's Servers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "stationaryStation",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.5.3"
+  }
+}
