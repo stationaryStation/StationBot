@@ -71,6 +71,6 @@ After installing pm2, run the following:
 
 ```
 pm2 startup
-pm2 save
 pm2 start index.js
+pm2 save
 ```
