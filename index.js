@@ -4,6 +4,7 @@ const client = new Discord.Client();
 const prefix = "st!";
 client.on('ready', () => {
     console.log('Bot ready for operation.')
+    client.user.setActivity('st!help for command list.', {type: 'LISTENING'});
 });
 
 client.on("message", function(message) {
@@ -44,6 +45,42 @@ client.on("message", function(message) {
             message.reply("You didn't mention the user to kick!")
         }
     }
+    if (command === "ban") {
+        const user = message.mentions.users.first();
+        if (user) {
+            const member = message.guild.member(user);
+            if (member) {
+                member.ban('Someone was banned using st!ban').then(() => {
+                    message.reply(`Successfully ban ${user.tag} `)
+                }).catch(err => {
+                    message.reply(`Failed to ban ${user.tag}. Do i got the necessary permissions?`);
+                    console.error(err);
+                });
+            } else {
+                message.reply("That user isn't in this guild!");
+            }
+        } else {
+            message.reply("You didn't mention the user to ban!")
+        }
+    }
+    if (command === "help") {
+        message.reply(`Current Commands:\n st!kick(username) | This command kicks the selected user.\n st!serverinfo | This command list the current user count of a server and the server name.\n st!ping | Pings the bot and tells your current ping.\n st!test | Sends Hello World! to the chat.\n st!ban(username) | Bans the username.`)
+    }
+    // if (command === "restart") {
+    //     if (message.author.id === '567014451337887744') {
+    //         message.channel.send('Restarting!').then(sentMessage => {
+    //             sentMessage.react(':white_check_mark:')
+    //             process.exit();
+    //         });
+    //     } else {
+    //         message.reply("HEY! You can't just shutdown myself! You need the author's permission!");
+    //     }
+        
+    // }
+    if (command === "forcerestart") {
+        process.exit();
+    }
+    
 });
 
 client.login(config.BOT_TOKEN)
