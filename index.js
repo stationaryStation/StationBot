@@ -33,7 +33,7 @@ client.on("message", function(message) {
             const member = message.guild.member(user);
             if (member) {
                 member.kick('Someone was kicked using st!kick').then(() => {
-                    message.reply(`Successfully kicked ${user.tag} `)
+                    message.reply(`Successfully kicked ${user.tag} `);
                 }).catch(err => {
                     message.reply(`Failed to kick ${user.tag}. Do i got the necessary permissions?`);
                     console.error(err);
@@ -42,7 +42,7 @@ client.on("message", function(message) {
                 message.reply("That user isn't in this guild!");
             }
         } else {
-            message.reply("You didn't mention the user to kick!")
+            message.reply("You didn't mention the user to kick!");
         }
     }
     if (command === "ban") {
@@ -51,7 +51,7 @@ client.on("message", function(message) {
             const member = message.guild.member(user);
             if (member) {
                 member.ban('Someone was banned using st!ban').then(() => {
-                    message.reply(`Successfully ban ${user.tag} `)
+                    message.reply(`Successfully ban ${user.tag} `);
                 }).catch(err => {
                     message.reply(`Failed to ban ${user.tag}. Do i got the necessary permissions?`);
                     console.error(err);
@@ -60,11 +60,11 @@ client.on("message", function(message) {
                 message.reply("That user isn't in this guild!");
             }
         } else {
-            message.reply("You didn't mention the user to ban!")
+            message.reply("You didn't mention the user to ban!");
         }
     }
     if (command === "help") {
-        message.reply(`Current Commands:\n st!kick(username) | This command kicks the selected user.\n st!serverinfo | This command list the current user count of a server and the server name.\n st!ping | Pings the bot and tells your current ping.\n st!test | Sends Hello World! to the chat.\n st!ban(username) | Bans the username.`)
+        message.reply(`Current Commands:\n st!kick(username) | This command kicks the selected user.\n st!serverinfo | This command list the current user count of a server and the server name.\n st!ping | Pings the bot and tells your current ping.\n st!test | Sends Hello World! to the chat.\n st!ban(username) | Bans the username.`);
     }
     // if (command === "restart") {
     //     if (message.author.id === '567014451337887744') {
@@ -81,8 +81,7 @@ client.on("message", function(message) {
         process.exit();
     }
     if (command === "about") {
-      message.reply(`stationBot 1.0.1u Unstable Branch\n Dependencies: node.js, discord.js v12\n Ping: ${timeTaken}ms `)
-    }
+      message.reply(`stationBot 1.0.1u Unstable Branch\n Dependencies: node.js, discord.js v12\n Ping: ${timeTaken}ms `);
     }
     
 });
