@@ -80,7 +80,10 @@ client.on("message", function(message) {
     if (command === "forcerestart") {
         process.exit();
     }
-    if (command === "about")
+    if (command === "about") {
+      message.reply(`stationBot 1.0.1u Unstable Branch\n Dependencies: node.js, discord.js v12\n Ping: ${timeTaken}ms `)
+    }
+    }
     
 });
 
