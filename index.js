@@ -1,10 +1,10 @@
 const Discord = require("discord.js");
 const config = require("./config.json");
 const client = new Discord.Client();
-const prefix = "st!";
+const prefix = "stu!";
 client.on('ready', () => {
-    console.log('Bot ready for operation.')
-    client.user.setActivity('st!help for command list.', {type: 'LISTENING'});
+    console.log('Bot ready for operation. stationBot ver 1.0.1 (Unstable Github branch)')
+    client.user.setActivity('stu!help for command list. | Using unstable branch.', {type: 'LISTENING'});
 });
 
 client.on("message", function(message) {
@@ -80,6 +80,7 @@ client.on("message", function(message) {
     if (command === "forcerestart") {
         process.exit();
     }
+    if (command === "about")
     
 });
 
