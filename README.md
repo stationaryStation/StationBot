@@ -78,3 +78,10 @@ pm2 startup
 pm2 start index.js
 pm2 save
 ```
+## Invite the bot
+If you don't want to host the bot for yourself and want to use an updated current branch bot. You can invite the official vanilla bot with this link.
+https://discord.com/api/oauth2/authorize?client_id=840257245173907457&permissions=4294967287&scope=bot
+
+```
+The bot is still on early development and might be unstable at times.
+```
