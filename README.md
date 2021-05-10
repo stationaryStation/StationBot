@@ -14,6 +14,10 @@ A stupid, yet effective moderation bot made with discord.js and node.js
 
 **st!forcerestart** | Restarts the bot. 
 
+**st!botinfo** | Displays current bot info
+
+**st!devcommands** | Displays current developer commands.
+
 ## Installation
 Clone the repo using git or github-cli
 
