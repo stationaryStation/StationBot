@@ -4,7 +4,7 @@ const client = new Discord.Client();
 const prefix = "st!";
 client.on('ready', () => {
     console.log('Bot ready for operation.')
-    client.user.setActivity('st!help for command list.', {type: 'LISTENING'});
+    client.user.setActivity('st!help for command list. | Using Current Branch', {type: 'LISTENING'});
 });
 
 client.on("message", function(message) {
@@ -71,17 +71,17 @@ client.on("message", function(message) {
     if (command === "help") {
         message.reply(`Current Commands:\n st!kick(username) | This command kicks the selected user.\n st!serverinfo | This command list the current user count of a server and the server name.\n st!ping | Pings the bot and tells your current ping.\n st!test | Sends Hello World! to the chat.\n st!ban(username) | Bans the username.\n st!changenick (wip) | Sets your nickname to what you want.`);
     }
-    // if (command === "restart") {
-    //     if (message.author.id === '567014451337887744') {
-    //         message.channel.send('Restarting!').then(sentMessage => {
-    //             sentMessage.react(':white_check_mark:')
-    //             process.exit();
-    //         });
-    //     } else {
-    //         message.reply("HEY! You can't just shutdown myself! You need the author's permission!");
-    //     }
+    if (command === "restart") {
+        if (message.author.id === '567014451337887744') {
+            message.channel.send('Restarting!').then(sentMessage => {
+                sentMessage.react(':white_check_mark:')
+                process.exit();
+            });
+        } else {
+            message.reply("HEY! You can't just shutdown myself! You need the author's permission!");
+        }
         
-    // }
+    }
     if (command === "forcerestart") {
         process.exit();
     }
@@ -95,6 +95,9 @@ client.on("message", function(message) {
        nickedUser.setNickname(NickReason);
        message.channel.send("Changed " + nickedUser + "'s nickname successfully!");
 
+    }
+    if (command === "devcommands") {
+        message.channel.send(`Current Dev Commands:\n st!forcerestart: Restarts the bot. If node.js mode is enabled, the bot will shutdown.\n st!restart: Restarts the bot, if you are the owner.`);
     }
     
 });
