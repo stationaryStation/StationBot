@@ -2,12 +2,15 @@ const Discord = require("discord.js");
 const config = require("./config.json");
 const client = new Discord.Client();
 const prefix = "st!";
+const verNumber = "1.0.2c"
 client.on('ready', () => {
     console.log('Bot ready for operation.')
-    client.user.setActivity('st!help for command list. | Using Current Branch', {type: 'LISTENING'});
+    client.user.setActivity('st!help for command list. | Using Current Branch', {
+        type: 'LISTENING'
+    });
 });
 
-client.on("message", function(message) {
+client.on("message", function (message) {
     if (message.author.bot) return;
     if (!message.content.startsWith(prefix)) return;
 
@@ -17,7 +20,7 @@ client.on("message", function(message) {
 
     if (command === "botinfo") {
         const timeTaken = Date.now() - message.createdTimestamp;
-        message.channel.send(`StationBot by stationaryStation\n Version: 1.0.1c\n Current Branch: Stable(github)\n Ping: ${timeTaken}ms\n Hosted with: node.js, discord.js and pm2`)
+        message.channel.send(`StationBot by stationaryStation\n Version: ${verNumber}\n Current Branch: Stable(github)\n Ping: ${timeTaken}ms\n Hosted with: node.js, discord.js and pm2`)
     }
 
     if (command === "serverinfo") {
@@ -29,7 +32,7 @@ client.on("message", function(message) {
     // Ping Command
     if (command === "ping") {
         const timeTaken = Date.now() - message.createdTimestamp;
-    message.reply(`Pong! This message had a latency of ${timeTaken}ms.`);
+        message.reply(`Pong! This message had a latency of ${timeTaken}ms.`);
     }
     // Kick Command
     if (command === "kick") {
@@ -52,24 +55,33 @@ client.on("message", function(message) {
     }
     if (command === "ban") {
         const user = message.mentions.users.first();
-        if (user) {
-            const member = message.guild.member(user);
-            if (member) {
-                member.ban('Someone was banned using st!ban').then(() => {
-                    message.reply(`Successfully ban ${user.tag} `)
-                }).catch(err => {
-                    message.reply(`Failed to ban ${user.tag}. Do i got the necessary permissions?`);
-                    console.error(err);
-                });
+        let guildA = client.guilds.cache.get("839953392587112469");
+        let requiredRole = guildA.roles.cache.get("839953392587112469");
+        let member = guildA.members.cache.get(message.author.id)
+        // Check if they have the required role.
+        if (member, roles.cache.has(requiredRole.id)) {
+            if (user) {
+                const member = message.guild.member(user);
+                if (member) {
+                    member.ban('Someone was banned using st!ban').then(() => {
+                        message.reply(`Successfully ban ${user.tag} `)
+                    }).catch(err => {
+                        message.reply(`Failed to ban ${user.tag}. Do i got the necessary permissions?`);
+                        console.error(err);
+                    });
+                } else {
+                    message.reply("That user isn't in this guild!");
+                }
             } else {
-                message.reply("That user isn't in this guild!");
+                message.reply("You didn't mention the user to ban!");
             }
         } else {
-            message.reply("You didn't mention the user to ban!");
+            message.channel.send("You don't have the necessary role to run this command.");
         }
+
     }
     if (command === "help") {
-        message.reply(`Current Commands:\n st!kick(username) | This command kicks the selected user.\n st!serverinfo | This command list the current user count of a server and the server name.\n st!ping | Pings the bot and tells your current ping.\n st!test | Sends Hello World! to the chat.\n st!ban(username) | Bans the username.\n st!changenick (wip) | Sets your nickname to what you want.`);
+        message.reply(`Current Commands:\n st!kick(username) | This command kicks the selected user.\n st!serverinfo | This command list the current user count of a server and the server name.\n st!ping | Pings the bot and tells your current ping.\n st!test | Sends Hello World! to the chat.\n st!ban(username) | Bans the username.\n st!changeusernick | Sets other's nickname to what you want.`);
     }
     if (command === "restart") {
         if (message.author.id === '567014451337887744') {
@@ -80,26 +92,28 @@ client.on("message", function(message) {
         } else {
             message.reply("HEY! You can't just shutdown myself! You need the author's permission!");
         }
-        
+
     }
     if (command === "forcerestart") {
         process.exit();
     }
-    if (command === "changenick") {
-       let nickedUser = message.mentions.users.first();
-       let nickReason = args.join(" ").slice(22);
-       if (!nickedUser) return message.channel.send("You didn't mention a valid user!")
-       if (!nickReason) return message.channel.send("Not having a name is not a good nickname.");
-       if(!message.member.hasPermission("MANAGE_NICKNAMES")) return message.channel.send("No permissions!");
-       if(nick.hasPermission("MANAGE_NICKNAMES")) return message.channel.send("No need to change the nickname of someone that can change nicknames as well.");
-       nickedUser.setNickname(NickReason);
-       message.channel.send("Changed " + nickedUser + "'s nickname successfully!");
+    if (command === "changeusernick") {
+        const memberToEdit = message.mentions.members.first();
+        const newNickname = message.content.replace(`${prefix}changenick`, '').split(' ').pop().trim();
+        memberToEdit.setNickname(newNickname);
 
+    }
+    if (command === "pootisfy") {
+        let nick = "pootis"
+        message.member.setNickname(nick);
     }
     if (command === "devcommands") {
         message.channel.send(`Current Dev Commands:\n st!forcerestart: Restarts the bot. If node.js mode is enabled, the bot will shutdown.\n st!restart: Restarts the bot, if you are the owner.`);
     }
-    
+    if (command === "devmedia") {
+        message.channel.send(`Dev's twitter:\n https://twitter.com/dumplingfurry/\n Dev's StackOverflow:\n https://stackoverflow.com/users/15887961/stationarystation?tab=profile `);
+    }
+
 });
 
 client.login(config.BOT_TOKEN)
