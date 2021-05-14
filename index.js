@@ -1,15 +1,19 @@
 const Discord = require("discord.js");
+const mySecret = process.env['BOT_TOKEN']
 const config = require("./config.json");
 const client = new Discord.Client();
 const prefix = "st!";
-const verNumber = "1.0.2c"
+const verNumber = "1.0.3bc"
 client.on('ready', () => {
-    console.log('Bot ready for operation.')
-    client.user.setActivity('st!help for command list. | Using Current Branch', {
-        type: 'LISTENING'
-    });
+  console.log(`Logged in as ${client.user.tag}.\n Ver: ${verNumber}\n Prefix: ${prefix} `);
+  console.log('Bot ready for operation.')
+  client.user.setActivity(`${prefix}help for command list. | Using Current Branch`, {
+    type: 'LISTENING'
+ });
 });
-
+client.on('message', message => {
+  console.log(`${message.author.tag} at ${message.guild.name} said: ${message.content}`);
+});
 client.on("message", function (message) {
     if (message.author.bot) return;
     if (!message.content.startsWith(prefix)) return;
@@ -20,7 +24,7 @@ client.on("message", function (message) {
 
     if (command === "botinfo") {
         const timeTaken = Date.now() - message.createdTimestamp;
-        message.channel.send(`StationBot by stationaryStation\n Version: ${verNumber}\n Current Branch: Stable(github)\n Ping: ${timeTaken}ms\n Hosted with: node.js, discord.js and pm2`)
+        message.channel.send(`StationBot by stationaryStation\n Version: ${verNumber}\n Current Branch: Stable(github)\n Ping: ${timeTaken}ms\n Hosted with: node.js, discord.js and repl.it`)
     }
 
     if (command === "serverinfo") {
@@ -47,7 +51,7 @@ client.on("message", function (message) {
                     console.error(err);
                 });
             } else {
-                message.reply("That user isn't in this guild!");
+                message.reply("That user isn't in this server!");
             }
         } else {
             message.reply("You didn't mention the user to kick!")
@@ -81,9 +85,9 @@ client.on("message", function (message) {
 
     }
     if (command === "help") {
-        message.reply(`Current Commands:\n st!kick(username) | This command kicks the selected user.\n st!serverinfo | This command list the current user count of a server and the server name.\n st!ping | Pings the bot and tells your current ping.\n st!test | Sends Hello World! to the chat.\n st!ban(username) | Bans the username.\n st!changeusernick | Sets other's nickname to what you want.`);
+        message.reply(`Current Commands:\n st!kick(username) | This command kicks the selected user.\n st!serverinfo | This command list the current user count of a server and the server name.\n st!ping | Pings the bot and tells your current ping.\n st!test | Sends Hello World! to the chat.\n st!ban(username) | Bans the username.\n st!changeusernick | Sets other's nickname to what you want.\n st!changenick | Changes your nickname (WIP)`);
     }
-    if (command === "restart") {
+    if (command === "shutdown") {
         if (message.author.id === '567014451337887744') {
             message.channel.send('Restarting!').then(sentMessage => {
                 sentMessage.react(':white_check_mark:')
@@ -94,18 +98,18 @@ client.on("message", function (message) {
         }
 
     }
-    if (command === "forcerestart") {
+    if (command === "restart") {
         process.exit();
     }
     if (command === "changeusernick") {
         const memberToEdit = message.mentions.members.first();
-        const newNickname = message.content.replace(`${prefix}changenick`, '').split(' ').pop().trim();
+        const newNickname = message.content.replace(`${prefix}changeusernick`, '').split(' ').pop().trim();
         memberToEdit.setNickname(newNickname);
 
     }
-    if (command === "pootisfy") {
-        let nick = "pootis"
-        message.member.setNickname(nick);
+    if (command === "changenick") {
+        const newNick = message.content.replace(`${prefix}changenick`, '').split(' ').pop().trim();
+        message.member.setNickname(newNick);
     }
     if (command === "devcommands") {
         message.channel.send(`Current Dev Commands:\n st!forcerestart: Restarts the bot. If node.js mode is enabled, the bot will shutdown.\n st!restart: Restarts the bot, if you are the owner.`);
@@ -116,4 +120,4 @@ client.on("message", function (message) {
 
 });
 
-client.login(config.BOT_TOKEN)
+client.login(mySecret)

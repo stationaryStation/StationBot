@@ -43,13 +43,13 @@ https://nodejs.org/dist/v16.1.0/node-v16.1.0-linux-x64.tar.xz | Linux
 discord.js
 
 ```
-npm install discord.js -g
+npm install discord.js
 ```
 
 pm2 (optional if you want to run this bot 24/7)
 
 ```
-nmp install pm2
+npm install pm2 -g
 ```
 
 You need a Bot token for this bot to work.
@@ -62,6 +62,17 @@ Then go to config.json and insert the token, also don't forget that the token is
 {
   "BOT_TOKEN": "insert the bot token here"
 }
+```
+You also can use repl.it's .env files to insert the token (Recomended by me)
+
+Follow the instructions here. Go to the secrets tab on repl.it and insert the folowing:
+``` env
+Key: BOT_TOKEN
+VALUE: "insert the bot token here"
+``` 
+After inserting, go to index.js and insert the folowing line to the start of the document
+``` javascript
+const mySecret = process.env['BOT_TOKEN']
 ```
 
 Then run the following command
