@@ -1,9 +1,8 @@
 const Discord = require("discord.js");
 const mySecret = process.env['BOT_TOKEN']
-const config = require("./config.json");
 const client = new Discord.Client();
 const prefix = "st!";
-const verNumber = "1.0.3bc"
+const verNumber = "1.0.2bc"
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}.\n Ver: ${verNumber}\n Prefix: ${prefix} `);
   console.log('Bot ready for operation.')
@@ -120,4 +119,4 @@ client.on("message", function (message) {
 
 });
 
-client.login(mySecret)
+client.login(mySecret);
