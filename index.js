@@ -11,7 +11,7 @@ client.on('ready', () => {
  });
 });
 client.on('message', message => {
-  console.log(`${message.author.tag} at ${message.guild.name} said: ${message.content}`);
+  console.log(`${message.author.tag} at ${message.guild.name} said: ${message.content}\n`);
 });
 client.on("message", function (message) {
     if (message.author.bot) return;
