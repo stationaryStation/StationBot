@@ -119,6 +119,10 @@ client.on("message", function (message) {
     if (command === "devmedia") {
         message.channel.send(`Dev's twitter:\n https://twitter.com/dumplingfurry/\n Dev's StackOverflow:\n https://stackoverflow.com/users/15887961/stationarystation?tab=profile `);
     }
+    if (command === "pootisfy") {
+      const nick = "pootis"
+      message.member.setNickname(nick);
+    }
 
 });
 
