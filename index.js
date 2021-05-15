@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const mySecret = process.env['BOT_TOKEN']
 const client = new Discord.Client();
 const prefix = "st!";
-const verNumber = "1.0.2bc"
+const verNumber = "1.0.3bc"
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}.\n Ver: ${verNumber}\n Prefix: ${prefix} `);
   console.log('Bot ready for operation.')
@@ -12,6 +12,9 @@ client.on('ready', () => {
 });
 client.on('message', message => {
   console.log(`${message.author.tag} at ${message.guild.name} said: ${message.content}\n`);
+  if (message.content == "fuck") {
+    message.reply("Don't say bad words :(");
+  }
 });
 client.on("message", function (message) {
     if (message.author.bot) return;
@@ -88,7 +91,7 @@ client.on("message", function (message) {
     }
     if (command === "shutdown") {
         if (message.author.id === '567014451337887744') {
-            message.channel.send('Restarting!').then(sentMessage => {
+            message.channel.send('Goodbye...').then(sentMessage => {
                 sentMessage.react(':white_check_mark:')
                 process.exit();
             });
@@ -111,7 +114,7 @@ client.on("message", function (message) {
         message.member.setNickname(newNick);
     }
     if (command === "devcommands") {
-        message.channel.send(`Current Dev Commands:\n st!forcerestart: Restarts the bot. If node.js mode is enabled, the bot will shutdown.\n st!restart: Restarts the bot, if you are the owner.`);
+        message.channel.send(`Current Dev Commands:\n shutdown: Shutdowns the bot. If node.js mode is enabled, the bot will shutdown.\n st!restart: Restarts the bot, if you are the owner.`);
     }
     if (command === "devmedia") {
         message.channel.send(`Dev's twitter:\n https://twitter.com/dumplingfurry/\n Dev's StackOverflow:\n https://stackoverflow.com/users/15887961/stationarystation?tab=profile `);
