@@ -107,9 +107,13 @@ client.on("message", function (message) {
         } else if (cmd === "changeusernick") {
             message.channel.send(`${prefix}changeusernick <user> <nick>\nUsage: Changes the nickname of the user mentioned to whatever you like`);
         } else if (cmd === "changenick") {
+<<<<<<< HEAD
             message.channel.send(`${prefix}changenick <nick>\nUsage: Changes your nickname to whatever you like\nRequirements: You need to not have nor the manage nicknames permission and the change nickname permission `);
         } else if (cmd === "boop"){
             message.channel.send(`${prefix}boop <user>\n Usage: Boops the mentioned user`)
+=======
+            message.channel.send(`${prefix}changenick <nick>\nUsage: Changes your nickname to whatever you like\nRequirements: You need to not have nor the manage nicknames permission nor the change nickname permission `);
+>>>>>>> b1fbdb43941c9bc4e1d15a5a9b0889866f4872b5
         } else if (cmd === "") {
             message.reply(`Current Commands:\n st!kick(username) | This command kicks the selected user.\n st!serverinfo | This command list the current user count of a server and the server name.\n st!ping | Pings the bot and tells your current ping.\n st!test | Sends Hello World! to the chat.\n st!ban(username) | Bans the username.\n st!changeusernick | Sets other's nickname to what you want.\n st!changenick | Changes your nickname (WIP)`);
         }
