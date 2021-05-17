@@ -108,6 +108,8 @@ client.on("message", function (message) {
             message.channel.send(`${prefix}changeusernick <user> <nick>\nUsage: Changes the nickname of the user mentioned to whatever you like`);
         } else if (cmd === "changenick") {
             message.channel.send(`${prefix}changenick <nick>\nUsage: Changes your nickname to whatever you like\nRequirements: You need to not have nor the manage nicknames permission and the change nickname permission `);
+        } else if (cmd === "boop"){
+            message.channel.send(`${prefix}boop <user>\n Usage: Boops the mentioned user`)
         } else if (cmd === "") {
             message.reply(`Current Commands:\n st!kick(username) | This command kicks the selected user.\n st!serverinfo | This command list the current user count of a server and the server name.\n st!ping | Pings the bot and tells your current ping.\n st!test | Sends Hello World! to the chat.\n st!ban(username) | Bans the username.\n st!changeusernick | Sets other's nickname to what you want.\n st!changenick | Changes your nickname (WIP)`);
         }
@@ -146,6 +148,14 @@ client.on("message", function (message) {
     if (command === "pootisfy") {
       const nick = "pootis"
       message.member.setNickname(nick);
+    }
+    if (command === "boop") {
+        const userToPing = message.mentions.members.first()
+        if (userToPing){
+            message.channel.send(`${userToPing}, Boop! ;p`);
+        } else {
+            message.reply("I can't boop the void! >:(");
+        }
     }
 
 });
