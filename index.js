@@ -3,6 +3,7 @@ const mySecret = process.env['BOT_TOKEN']
 const client = new Discord.Client();
 const prefix = "st!";
 const verNumber = "1.0.3bc"
+const dev = "567014451337887744"
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}.\n Ver: ${verNumber}\n Prefix: ${prefix} `);
   console.log('Bot ready for operation.')
@@ -23,15 +24,16 @@ client.on("message", function (message) {
     const commandBody = message.content.slice(prefix.length);
     const args = commandBody.split(' ');
     const command = args.shift().toLowerCase();
-
+    // lists bot info
     if (command === "botinfo") {
         const timeTaken = Date.now() - message.createdTimestamp;
         message.channel.send(`StationBot by stationaryStation\n Version: ${verNumber}\n Current Branch: Stable(github)\n Ping: ${timeTaken}ms\n Hosted with: node.js, discord.js and repl.it`)
     }
-
+    // Lists server info
     if (command === "serverinfo") {
         message.channel.send(`Server name: ${message.guild.name}\n Total Members: ${message.guild.memberCount}\n`)
     }
+    // test if the bot works
     if (command === "test") {
         message.reply('Hello World!');
     }
@@ -87,10 +89,32 @@ client.on("message", function (message) {
 
     }
     if (command === "help") {
-        message.reply(`Current Commands:\n st!kick(username) | This command kicks the selected user.\n st!serverinfo | This command list the current user count of a server and the server name.\n st!ping | Pings the bot and tells your current ping.\n st!test | Sends Hello World! to the chat.\n st!ban(username) | Bans the username.\n st!changeusernick | Sets other's nickname to what you want.\n st!changenick | Changes your nickname (WIP)`);
+        const cmd = message.content.replace(`${prefix}help`,'').split(' ').pop().trim();
+        if (cmd === "kick" ) {
+            message.channel.send(`${prefix}kick <username>\nUsage: Kicks the user that you mentioned. `);
+        } else if (cmd ==="ping" ) {
+            message.channel.send(`${prefix}ping\nUsage: The bot replies to you with your current ping.`);
+        } else if (cmd === "shutdown") {
+            message.channel.send(`${prefix}shutdown\nUsage: Shutdowns the bot.\n Requirements: Be the dev`);
+        } else if (cmd === "restart") {
+            message.channel.send(`${prefix}restart\nUsage: Restarts the bot`);
+        } else if (cmd === "help") {
+            message.channel.send(`${prefix}help <command>\nUsage: Lists all current commands`);
+        } else if (cmd === "ban") {
+            message.channel.send(`${prefix}ban <UserID/User>\nUsage: Bans the user mentioned permanently\nRequirements: Be an admin`);
+        } else if (cmd === "pootisfy") {
+            message.channel.send(`${prefix}pootisfy\n Usage: Changes your nickname to pootis\nRequirements: You need to not have the manage nicknames permission and the change nickname permission`);
+        } else if (cmd === "changeusernick") {
+            message.channel.send(`${prefix}changeusernick <user> <nick>\nUsage: Changes the nickname of the user mentioned to whatever you like`);
+        } else if (cmd === "changenick") {
+            message.channel.send(`${prefix}changenick <nick>\nUsage: Changes your nickname to whatever you like\nRequirements: You need to not have nor the manage nicknames permission and the change nickname permission `);
+        } else if (cmd === "") {
+            message.reply(`Current Commands:\n st!kick(username) | This command kicks the selected user.\n st!serverinfo | This command list the current user count of a server and the server name.\n st!ping | Pings the bot and tells your current ping.\n st!test | Sends Hello World! to the chat.\n st!ban(username) | Bans the username.\n st!changeusernick | Sets other's nickname to what you want.\n st!changenick | Changes your nickname (WIP)`);
+        }
+       
     }
     if (command === "shutdown") {
-        if (message.author.id === '567014451337887744') {
+        if (message.author.id === dev) {
             message.channel.send('Goodbye...').then(sentMessage => {
                 sentMessage.react(':white_check_mark:')
                 process.exit();
