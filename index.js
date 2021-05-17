@@ -155,7 +155,7 @@ client.on("message", function (message) {
         if (userToPing){
             message.channel.send(`${userToPing}, Boop! ;p`);
         } else {
-            message.reply("I can't boop the void! >:(");
+            message.reply(`I can't boop the void! >:(\n So please mention a user goddamit. `);
         }
     }
 
