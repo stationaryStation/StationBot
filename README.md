@@ -1,23 +1,6 @@
 # ![V2 (App INFO) Github](https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png)  StationBot 
 A stupid, yet effective moderation bot made with discord.js and node.js
 
-## Current commands
-**st!test**     |  Tests the bot with a simple Hello World! message
-
-**st!serverinfo** |  Displays current server information.
-
-**st!ping**     | Pings the bot and displays your current ping.
-
-**st!kick**     | Kicks the selected username.
-
-**st!ban**   | Bans the selected username.
-
-**st!forcerestart** | Restarts the bot. 
-
-**st!botinfo** | Displays current bot info
-
-**st!devcommands** | Displays current developer commands.
-
 ## Installation
 Clone the repo using git or github-cli
 
