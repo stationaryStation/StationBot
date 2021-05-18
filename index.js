@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const mySecret = process.env['BOT_TOKEN']
+const mySecret = require('./config.json')
 const client = new Discord.Client();
 const prefix = "st!";
 const verNumber = "1.0.4c"
