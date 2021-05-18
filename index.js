@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const mySecret = process.env['BOT_TOKEN']
 const client = new Discord.Client();
 const prefix = "st!";
-const verNumber = "1.0.3bc"
+const verNumber = "1.0.4c"
 const dev = "567014451337887744"
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}.\n Ver: ${verNumber}\n Prefix: ${prefix} `);
@@ -109,8 +109,9 @@ client.on("message", function (message) {
         } else if (cmd === "changenick") {
             message.channel.send(`${prefix}changenick <nick>\nUsage: Changes your nickname to whatever you like\nRequirements: You need to not have nor the manage nicknames permission and the change nickname permission `);
         } else if (cmd === "boop"){
-            message.channel.send(`${prefix}boop <user>\n Usage: Boops the mentioned user`)
-            message.channel.send(`${prefix}changenick <nick>\nUsage: Changes your nickname to whatever you like\nRequirements: You need to not have nor the manage nicknames permission nor the change nickname permission `);
+            message.channel.send(`${prefix}boop <user>\n Usage: Boops the mentioned user`);
+        } else if (cmd === "devmedia") {
+            message.channel.send(`${prefix}devmedia\nUsage: Lists stationaryStation's social media`);
         } else if (cmd === "") {
             message.reply(`Current Commands:\n st!kick(username) | This command kicks the selected user.\n st!serverinfo | This command list the current user count of a server and the server name.\n st!ping | Pings the bot and tells your current ping.\n st!test | Sends Hello World! to the chat.\n st!ban(username) | Bans the username.\n st!changeusernick | Sets other's nickname to what you want.\n st!changenick | Changes your nickname (WIP)`);
         }
@@ -149,6 +150,11 @@ client.on("message", function (message) {
     if (command === "pootisfy") {
       const nick = "pootis"
       message.member.setNickname(nick);
+    }
+    if (command === "resetnick") {
+        const nick = message.author();
+        message.member.setNickname(nick);
+        
     }
     if (command === "boop") {
         const userToPing = message.mentions.members.first()
