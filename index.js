@@ -152,7 +152,7 @@ client.on("message", function (message) {
       message.member.setNickname(nick);
     }
     if (command === "resetnick") {
-        const nick = message.author();
+        const nick = message.author.tag();
         message.member.setNickname(nick);
         
     }
