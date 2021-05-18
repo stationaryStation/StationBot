@@ -1,12 +1,12 @@
-const Discord = require("discord.js");
-const mySecret = require('./config.json')
+const Discord = require('discord.js');
+const config = require('./config.json')
 const client = new Discord.Client();
-const prefix = "st!";
-const verNumber = "1.0.4c"
-const dev = "567014451337887744"
+const prefix = 'st!';
+const verNumber = '1.0.4c';
+const dev = '567014451337887744';
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}.\n Ver: ${verNumber}\n Prefix: ${prefix} `);
-  console.log('Bot ready for operation.')
+  console.log('Bot ready for operation.');
   client.user.setActivity(`${prefix}help for command list. | Using Current Branch`, {
     type: 'LISTENING'
  });
@@ -14,7 +14,7 @@ client.on('ready', () => {
 client.on('message', message => {
   console.log(`${message.author.tag} at ${message.guild.name} said: ${message.content}\n`);
   if (message.content == "fuck") {
-    message.reply("Don't say bad words :(");
+    message.reply('Don\'t say bad words :(');
   }
 });
 client.on("message", function (message) {
@@ -167,4 +167,4 @@ client.on("message", function (message) {
 
 });
 
-client.login(mySecret);
+client.login(config.BOT_TOKEN);
