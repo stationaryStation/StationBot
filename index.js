@@ -113,7 +113,7 @@ client.on("message", function (message) {
         } else if (cmd === "devmedia") {
             message.channel.send(`${prefix}devmedia\nUsage: Lists stationaryStation's social media`);
         } else if (cmd === "") {
-            message.reply(`Current Commands:\n st!kick(username) | This command kicks the selected user.\n st!serverinfo | This command list the current user count of a server and the server name.\n st!ping | Pings the bot and tells your current ping.\n st!test | Sends Hello World! to the chat.\n st!ban(username) | Bans the username.\n st!changeusernick | Sets other's nickname to what you want.\n st!changenick | Changes your nickname (WIP)`);
+            message.reply(`Commands:\ndevmedia\nboop\nchangenick\nchangeusernick\npootisfy\nban\nhelp\nrestart\nshutdown\nping\nkick`);
         }
        
     }
