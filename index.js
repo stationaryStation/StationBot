@@ -2,13 +2,13 @@ const Discord = require('discord.js');
 const config = require('./config.json')
 const client = new Discord.Client();
 const prefix = 'st!';
-const altPrefix = 'altprefix';
+const altPrefix = 'sta!';
 const verNumber = '1.0.4c';
 const dev = '567014451337887744';
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}.\n Ver: ${verNumber}\n Prefix: ${prefix} `);
   console.log('Bot ready for operation.');
-  client.user.setActivity(`${prefix}help for command list. | Using Current Branch`, {
+  client.user.setActivity(`${prefix}help and ${altPrefix}help for command list. | Using Current Branch`, {
     type: 'LISTENING'
  });
 });
