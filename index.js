@@ -19,7 +19,7 @@ client.on('message', message => {
 });
 client.on("message", function (message) {
     if (message.author.bot) return;
-    if (!message.content.startsWith(prefix))
+    if (!message.content.startsWith(prefix)) return; // This pesky return; was missing
 
     const commandBody = message.content.slice(prefix.length);
     const args = commandBody.split(' ');
@@ -61,6 +61,7 @@ client.on("message", function (message) {
             message.reply("You didn't mention the user to kick!")
         }
     }
+    // ban command
     if (command === "ban") {
         const user = message.mentions.users.first();
         let guildA = client.guilds.cache.get("839953392587112469");
@@ -88,6 +89,7 @@ client.on("message", function (message) {
         }
 
     }
+    // Totally normal help command
     if (command === "help") {
         const cmd = message.content.replace(`${prefix}help`,'').split(' ').pop().trim();
         if (cmd === "kick" ) {
