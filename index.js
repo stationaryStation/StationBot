@@ -167,7 +167,7 @@ client.on("message", function (message) {
         }
     }
     if (command === "issue") {
-        message.channel.send('https://github.com/stationaryStation/issues');
+        message.channel.send('https://github.com/stationaryStation/stationBot/issues');
         message.channel.send('All issues are here.');
     }
     if (command === "github") {
