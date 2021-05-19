@@ -147,7 +147,7 @@ client.on("message", function (message) {
         message.channel.send(`Current Dev Commands:\n shutdown: Shutdowns the bot. If node.js mode is enabled, the bot will shutdown.\n st!restart: Restarts the bot, if you are the owner.`);
     }
     if (command === "devmedia") {
-        message.channel.send(`Dev's twitter:\n https://twitter.com/dumplingfurry/\n Dev's StackOverflow:\n https://stackoverflow.com/users/15887961/stationarystation?tab=profile `);
+        message.channel.send(`Dev's twitter:\n https://twitter.com/dumplingfurry/\n Dev's StackOverflow:\n https://stackoverflow.com/users/15887961/stationarystation?tab=profile\n Dev's Github: https://github.com/stationaryStation `);
     }
     if (command === "pootisfy") {
       const nick = "pootis"
@@ -165,6 +165,13 @@ client.on("message", function (message) {
         } else {
             message.reply(`I can't boop the void! >:(\n So please mention a user goddamit. `);
         }
+    }
+    if (command === "issue") {
+        message.channel.send('https://github.com/stationaryStation/issues');
+        message.channel.send('All issues are here.');
+    }
+    if (command === "github") {
+        message.channel.send('https://github.com/stationaryStation/stationBot/');
     }
 
 }); 
