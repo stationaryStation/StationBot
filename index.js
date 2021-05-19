@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const config = require('./config.json');
 const client = new Discord.Client();
 const prefix = 'st!';
-const verNumber = '1.1.0c';
+const verNumber = '1.1.1c';
 const dev = '567014451337887744';
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}.\n Ver: ${verNumber}\n Prefix: ${prefix}`);
