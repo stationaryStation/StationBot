@@ -64,11 +64,6 @@ client.on("message", function (message) {
     // ban command
     if (command === "ban") {
         const user = message.mentions.users.first();
-        let guildA = client.guilds.cache.get("839953392587112469");
-        let requiredRole = guildA.roles.cache.get("839953392587112469");
-        let member = guildA.members.cache.get(message.author.id)
-        // Check if they have the required role.
-        if (member, roles.cache.has(requiredRole.id)) {
             if (user) {
                 const member = message.guild.member(user);
                 if (member) {
@@ -84,11 +79,8 @@ client.on("message", function (message) {
             } else {
                 message.reply("You didn't mention the user to ban!");
             }
-        } else {
-            message.channel.send("You don't have the necessary role to run this command.");
-        }
+        } 
 
-    }
     // Totally normal help command
     if (command === "help") {
         const cmd = message.content.replace(`${prefix}help`,'').split(' ').pop().trim();
@@ -123,6 +115,7 @@ client.on("message", function (message) {
         if (message.author.id === dev) {
             message.channel.send('Goodbye...').then(sentMessage => {
                 sentMessage.react(':white_check_mark:')
+                // eslint-disable-next-line no-undef
                 process.exit();
             });
         } else {
@@ -131,6 +124,7 @@ client.on("message", function (message) {
 
     }
     if (command === "restart") {
+        // eslint-disable-next-line no-undef
         process.exit();
     }
     if (command === "changeusernick") {
@@ -168,7 +162,7 @@ client.on("message", function (message) {
     }
     if (command === "issue") {
         message.channel.send('https://github.com/stationaryStation/stationBot/issues');
-        message.channel.send('All issues are here.');
+        message.channel.send('Post your issues here. Also, here you can look at the code :depressed:');
     }
     if (command === "github") {
         message.channel.send('https://github.com/stationaryStation/stationBot/');
