@@ -17,7 +17,7 @@ Then go to the created directory named StationBot.
 Install node.js and discord.js
 
 Node.js
-```
+```txt
 https://nodejs.org/dist/v16.1.0/node-v16.1.0-x86.msi    | Windows
 https://nodejs.org/dist/v16.1.0/node-v16.1.0.pkg        | MacOS
 https://nodejs.org/dist/v16.1.0/node-v16.1.0-linux-x64.tar.xz | Linux
@@ -25,13 +25,13 @@ https://nodejs.org/dist/v16.1.0/node-v16.1.0-linux-x64.tar.xz | Linux
 
 discord.js
 
-```
+```bash
 npm install discord.js
 ```
 
 pm2 (optional if you want to run this bot 24/7)
 
-```
+```bash
 npm install pm2 -g
 ```
 
@@ -41,7 +41,7 @@ To get it, follow this tutorial
 www.writebots.com/discord-bot-token/
 
 Then go to config.json and insert the token, also don't forget that the token is yours and nobody should have it.
-```
+```json
 {
   "BOT_TOKEN": "insert the bot token here"
 }
@@ -59,7 +59,7 @@ const mySecret = process.env['BOT_TOKEN']
 ```
 
 Then run the following command
-```
+```bash
 node index.js
 ```
 
@@ -67,7 +67,7 @@ node index.js
 
 After installing pm2, run the following:
 
-```
+```bash
 pm2 startup
 pm2 start index.js
 pm2 save
@@ -76,6 +76,6 @@ pm2 save
 If you don't want to host the bot for yourself and want to use an updated current branch bot. You can invite the official vanilla bot with this link.
 https://discord.com/api/oauth2/authorize?client_id=840257245173907457&permissions=4294967287&scope=bot
 
-```
+```txt
 The bot is still on early development and might be unstable at times.
 ```
