@@ -7,9 +7,18 @@ const dev = '567014451337887744';
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}.\n Ver: ${verNumber}\n Prefix: ${prefix}`);
   console.log('Bot ready for operation.');
-  client.user.setActivity(`${prefix}help for command list. | Using Current Branch`, {
-    type: 'LISTENING'
- });
+  if (config.stable == true){
+    client.user.setActivity(`${prefix}help for command list. | Using Current Branch`, {
+        type: 'LISTENING'
+     });
+  } else if (config.stable == false) {
+    client.user.setActivity(`${prefix}help for command list. | Using Unstable Branch`, {
+        type: 'LISTENING'
+     });
+  } else {
+      console.error("An unexpected error has ocurred. Please report the issue to https://github.com/stationaryStation/stationBot/issues");
+  }
+  
 });
 client.on('message', message => {
   console.log(`${message.author.tag} at ${message.guild.name} said: ${message.content}\n`);
@@ -96,7 +105,7 @@ client.on("message", function (message) {
             message.channel.send(`${prefix}help <command>\nUsage: Lists all current commands`);
         } else if (cmd === "ban") {
             message.channel.send(`${prefix}ban <UserID/User>\nUsage: Bans the user mentioned permanently\nRequirements: Be an admin`);
-        } else if (cmd === "pootisfy") {
+        } else if (cmd === "pootisfy" && config.stable == false) {
             message.channel.send(`${prefix}pootisfy\n Usage: Changes your nickname to pootis\nRequirements: You need to not have the manage nicknames permission and the change nickname permission`);
         } else if (cmd === "changeusernick") {
             message.channel.send(`${prefix}changeusernick <user> <nick>\nUsage: Changes the nickname of the user mentioned to whatever you like`);
@@ -106,8 +115,10 @@ client.on("message", function (message) {
             message.channel.send(`${prefix}boop <user>\n Usage: Boops the mentioned user`);
         } else if (cmd === "devmedia") {
             message.channel.send(`${prefix}devmedia\nUsage: Lists stationaryStation's social media`);
-        } else if (cmd === "") {
+        } else if (cmd === "" && config.stable == false) {
             message.reply(`Commands:\ndevmedia\nboop\nchangenick\nchangeusernick\npootisfy\nban\nhelp\nrestart\nshutdown\nping\nkick`);
+        } else if (cmd === "" && config.stable == true) {
+            message.reply(`Commands:\ndevmedia\nboop\nchangenick\nchangeusernick\nban\nhelp\nrestart\nshutdown\nping\nkick`);
         }
        
     }
@@ -147,7 +158,7 @@ client.on("message", function (message) {
       const nick = "pootis"
       message.member.setNickname(nick);
     }
-    if (command === "resetnick") {
+    if (command === "resetnick"&& config.stable == false) {
         const nick = message.author.tag();
         message.member.setNickname(nick);
         
@@ -160,12 +171,21 @@ client.on("message", function (message) {
             message.reply(`I can't boop the void! >:(\n So please mention a user goddamit. `);
         }
     }
-    if (command === "issue") {
+    if (command === "issue"&& config.stable == false) {
         message.channel.send('https://github.com/stationaryStation/stationBot/issues');
         message.channel.send('Post your issues here. Also, here you can look at the code :depressed:');
     }
     if (command === "github") {
         message.channel.send('https://github.com/stationaryStation/stationBot/');
+    }
+    if (command === "checkmode") {
+        if (config.stable == true) {
+            message.channel.send("Running on stable mode.");
+        } else if (config.stable == false){
+            message.channel.send("Running on unstable mode.");
+        } else {
+            message.channel.send("An unexpected error has occurred. Please report it with st!issue");
+        }
     }
 
 }); 
