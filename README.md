@@ -43,7 +43,9 @@ www.writebots.com/discord-bot-token/
 Then go to config.json and insert the token, also don't forget that the token is yours and nobody should have it.
 ```json
 {
-  "BOT_TOKEN": "insert the bot token here"
+  ### Here ###
+  "BOT_TOKEN": "insert the bot token here" 
+  "stable": true
 }
 ```
 You also can use repl.it's .env files to insert the token (Recomended by me)
