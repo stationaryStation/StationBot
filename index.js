@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const config = require('./config.json');
 const client = new Discord.Client();
-const prefix = ':';
+const prefix = config.prefix
 const verNumber = '1.1.1c';
 const dev = '567014451337887744';
 client.on('ready', () => {
