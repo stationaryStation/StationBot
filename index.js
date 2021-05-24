@@ -116,11 +116,11 @@ client.on("message", function (message) {
         } else if (cmd === "devmedia") {
             message.channel.send(`${prefix}devmedia\nUsage: Lists stationaryStation's social media`);
         } else if (cmd === "" && config.stable == false) {
-            message.reply(`Commands:\ndevmedia\nboop\nchangenick\nchangeusernick\npootisfy\nban\nhelp\nrestart\nshutdown\nping\nkick`);
+            message.channel.send(`Commands:\ndevmedia\nboop\nchangenick\nchangeusernick\npootisfy\nban\nhelp\nrestart\nshutdown\nping\nkick`);
         } else if (cmd === "" && config.stable == true) {
-            message.reply(`Commands:\ndevmedia\nboop\nchangenick\nchangeusernick\nban\nhelp\nrestart\nshutdown\nping\nkick`);
+            message.channel.send(`Commands:\ndevmedia\nboop\nchangenick\nchangeusernick\nban\nhelp\nrestart\nshutdown\nping\nkick`);
         } else if (cmd === "math") {
-            message.reply(`${prefix}math\nInfo: Calculate simple operations\nUsage: \`\`\`${prefix}math <op> <num1> <num2>\`\`\`\nArguments:\n Op: add, sub, div, multi, pow, root\n Num1: Insert a number\n Num2: Insert A number `)
+            message.channel.send(`${prefix}math\nInfo: Calculate simple operations\nUsage: \`\`\`${prefix}math <op> <num1> <num2>\`\`\`\nArguments:\n Op: add, sub, div, multi, pow, root\n Num1: Insert a number\n Num2: Insert A number `)
         }
        
     }
