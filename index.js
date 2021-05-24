@@ -2,7 +2,6 @@ const Discord = require('discord.js');
 const config = require('./config.json');
 const client = new Discord.Client();
 const prefix = ':';
-const mathPrefix = '=';
 const verNumber = '1.1.1c';
 const dev = '567014451337887744';
 client.on('ready', () => {
@@ -189,9 +188,77 @@ client.on("message", function (message) {
         }
     }
     if (command === 'math'){
-        const expr = message.sentMessage.replace(`${prefix}math`, );
-        var result = expr
-        message.channel.send(`Answer: ${result}`)
+        let op = args[0]
+        let num1 = args[1]
+        let num2 = args[2]
+
+        let parseNum1 = parseInt(num1)
+        let parseNum2 = parseInt(num2)
+
+        let ans
+
+        if (!op) {
+            message.channel.send("You need to specify the operation and the operands.");
+        } else {
+            if (op === "add"){
+                if(!args[1] || !args[2]) {
+                    message.channel.send("You need to specify the operands.");
+                } else {
+                    ans = parseNum1 + parseNum2
+                    message.channel.send(`Your answer is: ${ans}`)
+                }
+
+            } else if(op === "sub"){
+                if(!args[1] || !args[2]) {
+                    message.channel.send("You need to specify the operands.");
+                } else{
+                    ans = parseNum1 - parseNum2
+                    message.channel.send(`Your answer is: ${ans}`)
+                }
+
+            } else if(op === "mult"){
+                if(!args[1] || !args[2]) {
+                    message.channel.send("You need to specify the operands.");
+                } else {
+                    ans = parseNum1 * parseNum2
+                    message.channel.send(`Your answer is: ${ans}`)
+                }
+
+            } else if(op === "div"){
+                if(!args[1] || !args[2]) {
+                    message.channel.send("You need to specify the operands.");
+                } else {
+                    ans = parseNum1 / parseNum2
+                    message.channel.send(`Your answer is: ${ans}`)
+                }
+
+            }else if(op === "mod"){
+                if(!args[1] || !args[2]) {
+                    message.channel.send("You need to specify the operands.");
+                } else {
+                    ans = parseNum1 % parseNum2
+                    message.channel.send(`Your answer is: ${ans}`)
+                }
+
+            }else if(op === "pow"){
+                if(!args[1] || !args[2]) {
+                    message.channel.send("You need to specify the operands.");
+                } else {
+                    ans = Math.pow(parseNum1, parseNum2);
+                    message.channel.send(`Your answer is: ${ans}`)
+                }
+
+            }else if(op === "root"){
+                if(!args[1] || !args[2]) {
+                    message.channel.send("You need to specify the operands.");
+                }else {
+                    ans = Math.pow(parseNum1, 1/parseNum2);
+                    message.channel.send(`Your answer is: ${ans}`)
+                }
+
+            }
+        }
+
     }
     
 
