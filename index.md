@@ -1,37 +1,16 @@
-## Welcome to GitHub Pages
+## A bot made for moderation and for suffering(?)
 
-You can use the [editor on GitHub](https://github.com/stationaryStation/StationBot/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+If you want a stupid realy customizable bot for your relativly small server, this is the bot for you.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
-```markdown
-Syntax highlighted code block
+![image](https://user-images.githubusercontent.com/81704775/119379797-ea2a8d80-bc8d-11eb-8371-fdef8f999605.png)
+## Customization to the limit
+Customize absoluetly everything of the bot, from the prefix to the profile picture using the powerful discord.js engine.
+![recordedVideo](https://user-images.githubusercontent.com/81704775/119380251-789f0f00-bc8e-11eb-83af-eaee5eebfa94.gif)
 
-# Header 1
-## Header 2
-### Header 3
+## Donate
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/stationaryStation/StationBot/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+This bot took a **LOT** of time, and without your help i can't shape the bot to your needs. So please consider donating to me <3
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/M4M24QEPM)
