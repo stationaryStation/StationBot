@@ -34,7 +34,7 @@ client.on("message", function (message) {
     // lists bot info
     if (command === "botinfo") {
         const timeTaken = Date.now() - message.createdTimestamp;
-        message.channel.send(`StationBot by stationaryStation\nVersion: ${config.botVer}}\nCurrent Branch: Stable(github)\nPing: ${timeTaken}ms\nHosted with: node.js, discord.js and repl.it\nPrefixes: ${prefix}`)
+        message.channel.send(`StationBot by stationaryStation\nVersion: ${config.botVer}\nCurrent Branch: Stable(github)\nPing: ${timeTaken}ms\nHosted with: node.js, discord.js and repl.it\nPrefixes: ${prefix}`)
     }
     // Lists server info
     if (command === "serverinfo") {
