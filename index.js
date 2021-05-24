@@ -2,10 +2,8 @@ const Discord = require('discord.js');
 const config = require('./config.json');
 const client = new Discord.Client();
 const prefix = config.prefix
-const verNumber = '1.1.1c';
-const dev = '567014451337887744';
 client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}.\n Ver: ${verNumber}\n Prefix: ${prefix}`);
+  console.log(`Logged in as ${client.user.tag}.\n Ver: ${config.botVer}\n Prefix: ${prefix}`);
   console.log('Bot ready for operation.');
   if (config.stable == true){
     client.user.setActivity(`${prefix}help for command list. | Using Current Branch`, {
@@ -36,7 +34,7 @@ client.on("message", function (message) {
     // lists bot info
     if (command === "botinfo") {
         const timeTaken = Date.now() - message.createdTimestamp;
-        message.channel.send(`StationBot by stationaryStation\nVersion: ${verNumber}\nCurrent Branch: Stable(github)\nPing: ${timeTaken}ms\nHosted with: node.js, discord.js and repl.it\nPrefixes: ${prefix}`)
+        message.channel.send(`StationBot by stationaryStation\nVersion: ${config.botVer}}\nCurrent Branch: Stable(github)\nPing: ${timeTaken}ms\nHosted with: node.js, discord.js and repl.it\nPrefixes: ${prefix}`)
     }
     // Lists server info
     if (command === "serverinfo") {
@@ -125,7 +123,7 @@ client.on("message", function (message) {
        
     }
     if (command === "shutdown") {
-        if (message.author.id === dev) {
+        if (message.author.id === config.devID) {
             message.channel.send('Goodbye...').then(sentMessage => {
                 sentMessage.react(':white_check_mark:')
                 // eslint-disable-next-line no-undef
@@ -218,7 +216,7 @@ client.on("message", function (message) {
                     message.channel.send(`Your answer is: ${ans}`)
                 }
 
-            } else if(op === "mult"){
+            } else if(op === "multi"){
                 if(!args[1] || !args[2]) {
                     message.channel.send("You need to specify the operands.");
                 } else {
