@@ -45,7 +45,7 @@ Then go to config.json and insert the token, also don't forget that the token is
 If config.json is missing for some reason. Copy the following syntax.
 ```json
 {
-  "BOT_TOKEN": "insert the bot token here" 
+  "BOT_TOKEN": "insert the bot token here",
   "stable": true
 }
 ```
