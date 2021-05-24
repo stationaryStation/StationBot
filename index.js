@@ -1,7 +1,8 @@
 const Discord = require('discord.js');
 const config = require('./config.json');
 const client = new Discord.Client();
-const prefix = 'st!';
+const prefix = ':';
+const mathPrefix = '=';
 const verNumber = '1.1.1c';
 const dev = '567014451337887744';
 client.on('ready', () => {
@@ -141,7 +142,7 @@ client.on("message", function (message) {
     if (command === "changeusernick") {
         const memberToEdit = message.mentions.members.first();
         const newNickname = message.content.replace(`${prefix}changeusernick`, '').split(' ').pop().trim();
-        memberToEdit.setNickname(newNickname);
+        memberToEdit.setNickname(newNickname);''
 
     }
     if (command === "changenick") {
@@ -149,16 +150,16 @@ client.on("message", function (message) {
         message.member.setNickname(newNick);
     }
     if (command === "devcommands") {
-        message.channel.send(`Current Dev Commands:\n shutdown: Shutdowns the bot. If node.js mode is enabled, the bot will shutdown.\n st!restart: Restarts the bot, if you are the owner.`);
+        message.channel.send(`Current Dev Commands:\n shutdown: Shutdowns the bot. If node.js mode is enabled, the bot will shutdown.\n st!restart: Restarts the bot, if you are the owner.\n st!checkmode: Lists the `);
     }
     if (command === "devmedia") {
         message.channel.send(`Dev's twitter:\n https://twitter.com/dumplingfurry/\n Dev's StackOverflow:\n https://stackoverflow.com/users/15887961/stationarystation?tab=profile\n Dev's Github: https://github.com/stationaryStation `);
     }
     if (command === "pootisfy") {
-      const nick = "pootis"
-      message.member.setNickname(nick);
+      const nick = 'pootis' // add nick as pootis
+      message.member.setNickname(nick); // change the message author's nick to pootis
     }
-    if (command === "resetnick"&& config.stable == false) {
+    if (command === "resetnick"&& config.stable == false) { // Check if stable mode is false then run
         const nick = message.author.tag();
         message.member.setNickname(nick);
         
@@ -171,7 +172,7 @@ client.on("message", function (message) {
             message.reply(`I can't boop the void! >:(\n So please mention a user goddamit. `);
         }
     }
-    if (command === "issue"&& config.stable == false) {
+    if (command === "issue"&& config.stable == false) { // check if stable mode is false then run
         message.channel.send('https://github.com/stationaryStation/stationBot/issues');
         message.channel.send('Post your issues here. Also, here you can look at the code :depressed:');
     }
@@ -179,14 +180,20 @@ client.on("message", function (message) {
         message.channel.send('https://github.com/stationaryStation/stationBot/');
     }
     if (command === "checkmode") {
-        if (config.stable == true) {
+        if (config.stable == true) { // if unstable mode is true then say on the channel that unstable mode is on
             message.channel.send("Running on stable mode.");
-        } else if (config.stable == false){
+        } else if (config.stable == false){ // if stable mode is true then say on the channel that stable mode is on
             message.channel.send("Running on unstable mode.");
         } else {
             message.channel.send("An unexpected error has occurred. Please report it with st!issue");
         }
     }
+    if (command === 'math'){
+        const expr = message.sentMessage.replace(`${prefix}math`, );
+        var result = expr
+        message.channel.send(`Answer: ${result}`)
+    }
+    
 
 }); 
 
