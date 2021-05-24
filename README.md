@@ -1,5 +1,7 @@
 # ![V2 (App INFO) Github](https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png)  StationBot 
 A stupid, yet effective moderation bot made with discord.js and node.js
+### Donate :D
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/M4M24QEPM)
 
 ## Installation
 Clone the repo using git or github-cli
