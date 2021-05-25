@@ -2,6 +2,10 @@ const Discord = require('discord.js');
 const config = require('./config.json');
 const client = new Discord.Client();
 const prefix = config.prefix
+// Change bot's avatar and Username from config.json
+client.user.setAvatar(config.profilePicture);
+client.user.setUsername(config.botUsername)
+// When the bot is ready, the presence is set to the help command.
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}.\n Ver: ${config.botVer}\n Prefix: ${prefix}`);
   console.log('Bot ready for operation.');
@@ -14,15 +18,14 @@ client.on('ready', () => {
         type: 'LISTENING'
      });
   } else {
+      // This is just in case of the bot breaking.
       console.error("An unexpected error has ocurred. Please report the issue to https://github.com/stationaryStation/stationBot/issues");
   }
   
 });
+// When a message is sended in a guild(Server), it will be logged on the console/output
 client.on('message', message => {
   console.log(`${message.author.tag} at ${message.guild.name} said: ${message.content}\n`);
-  if (message.content == "fuck") {
-    message.reply('Don\'t say bad words :(');
-  }
 });
 client.on("message", function (message) {
     if (message.author.bot) return;
@@ -88,7 +91,7 @@ client.on("message", function (message) {
             }
         } 
 
-    // Totally normal help command
+    // Help Command
     if (command === "help") {
         const cmd = message.content.replace(`${prefix}help`,'').split(' ').pop().trim();
         if (cmd === "kick" ) {
@@ -122,6 +125,7 @@ client.on("message", function (message) {
         }
        
     }
+    // Shutdown command, Dev only
     if (command === "shutdown") {
         if (message.author.id === config.devID) {
             message.channel.send('Goodbye...').then(sentMessage => {
@@ -134,35 +138,43 @@ client.on("message", function (message) {
         }
 
     }
-    if (command === "restart") {
+    // Restart command, unstable mode only
+    if (command === "restart" && config.stable == false) {
         // eslint-disable-next-line no-undef
         process.exit();
     }
+    // Nickname changer command, User mention.
     if (command === "changeusernick") {
         const memberToEdit = message.mentions.members.first();
         const newNickname = message.content.replace(`${prefix}changeusernick`, '').split(' ').pop().trim();
         memberToEdit.setNickname(newNickname);''
 
     }
+    // Change your own nickname.
     if (command === "changenick") {
         const newNick = message.content.replace(`${prefix}changenick`, '').split(' ').pop().trim();
         message.member.setNickname(newNick);
     }
+    // Lists Developer commands
     if (command === "devcommands") {
         message.channel.send(`Current Dev Commands:\n shutdown: Shutdowns the bot. If node.js mode is enabled, the bot will shutdown.\n st!restart: Restarts the bot, if you are the owner.\n st!checkmode: Lists the `);
     }
+    // Lists The original developer's social media
     if (command === "devmedia") {
         message.channel.send(`Dev's twitter:\n https://twitter.com/dumplingfurry/\n Dev's StackOverflow:\n https://stackoverflow.com/users/15887961/stationarystation?tab=profile\n Dev's Github: https://github.com/stationaryStation `);
     }
+    // Pootisfy Command
     if (command === "pootisfy") {
       const nick = 'pootis' // add nick as pootis
       message.member.setNickname(nick); // change the message author's nick to pootis
     }
+    // Reset Nickname command, unstable mode only
     if (command === "resetnick"&& config.stable == false) { // Check if stable mode is false then run
         const nick = message.author.tag();
         message.member.setNickname(nick);
         
     }
+    // Pings a selected user.
     if (command === "boop") {
         const userToPing = message.mentions.members.first()
         if (userToPing){
@@ -171,13 +183,16 @@ client.on("message", function (message) {
             message.reply(`I can't boop the void! >:(\n So please mention a user goddamit. `);
         }
     }
+    // Issue command, unstable mode only
     if (command === "issue"&& config.stable == false) { // check if stable mode is false then run
         message.channel.send('https://github.com/stationaryStation/stationBot/issues');
         message.channel.send('Post your issues here. Also, here you can look at the code :depressed:');
     }
+    // sends the github repo to your current channel
     if (command === "github") {
         message.channel.send('https://github.com/stationaryStation/stationBot/');
     }
+    // Checks the current mode the bot is running.
     if (command === "checkmode") {
         if (config.stable == true) { // if unstable mode is true then say on the channel that unstable mode is on
             message.channel.send("Running on stable mode.");
@@ -187,6 +202,7 @@ client.on("message", function (message) {
             message.channel.send("An unexpected error has occurred. Please report it with st!issue");
         }
     }
+    // Math command
     if (command === 'math'){
         let op = args[0]
         let num1 = args[1]
@@ -263,5 +279,5 @@ client.on("message", function (message) {
     
 
 }); 
-
+// After that, login to the bot account.
 client.login(config.BOT_TOKEN);
