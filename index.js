@@ -2,9 +2,6 @@ const Discord = require('discord.js');
 const config = require('./config.json');
 const client = new Discord.Client();
 const prefix = config.prefix
-// Change bot's avatar and Username from config.json
-client.user.setAvatar(config.profilePicture);
-client.user.setUsername(config.botUsername)
 // When the bot is ready, the presence is set to the help command.
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}.\n Ver: ${config.botVer}\n Prefix: ${prefix}`);
@@ -281,3 +278,6 @@ client.on("message", function (message) {
 }); 
 // After that, login to the bot account.
 client.login(config.BOT_TOKEN);
+// Change bot's avatar and Username from config.json WIP
+// client.user.setAvatar('https://raw.githubusercontent.com/stationaryStation/StationBot/master/ProfilePictures/V2%20(Account).png');
+// client.user.setUsername(config.botUsername)
