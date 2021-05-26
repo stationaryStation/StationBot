@@ -36,8 +36,14 @@ client.on("message", function (message) {
     const command = args.shift().toLowerCase();
     // lists bot info
     if (command === "botinfo") {
-        const botInfoEmbed = new Discord.MessageEmbed().setColor('#FF0057').setTitle(`StationBot ${config.botVer}`).setURL('https://stationarystation.github.io/StationBot/').setAuthor('stationBot', 'https://raw.githubusercontent.com/stationaryStation/StationBot/master/ProfilePictures/V2%20(Account).png', 'https://stationarystation.github.io/StationBot/'.setDescription(`StationBot by stationaryStation\nA bot for moderation made with the powerful discord.js engine.`).setThumbnail('https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png')
-        ,message.channel.send(botInfoEmbed))
+        const botInfoEmbed = new Discord.MessageEmbed()
+	.setColor('#FF0057')
+	.setTitle(`StationBot ${config.botVer}`)
+	.setURL('https://github.com/stationaryStation/stationBot')
+	.setAuthor('stationaryStation', 'https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png', 'https://github.com/stationaryStation')
+	.setDescription(`StationBot by stationaryStation\nA bot for moderation made with the powerful discord.js engine.`)
+	.setThumbnail('https://raw.githubusercontent.com/stationaryStation/StationBot/master/ProfilePictures/V2%20(Account).png')
+        message.channel.send(botInfoEmbed)
     }
     // Lists server info
     if (command === "serverinfo") {
