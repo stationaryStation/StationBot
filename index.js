@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+// Required variables
 const config = require('./config.json');
 const client = new Discord.Client();
 const prefix = config.prefix
@@ -26,15 +27,17 @@ client.on('message', message => {
 });
 client.on("message", function (message) {
     if (message.author.bot) return;
-    if (!message.content.startsWith(prefix)) return; // This pesky return; was missing
+    // if there isn't an author, return
+    if (!message.content.startsWith(prefix)) return; 
+    // if no prefix was on the message, return
 
     const commandBody = message.content.slice(prefix.length);
     const args = commandBody.split(' ');
     const command = args.shift().toLowerCase();
     // lists bot info
     if (command === "botinfo") {
-        const timeTaken = Date.now() - message.createdTimestamp;
-        message.channel.send(`StationBot by stationaryStation\nVersion: ${config.botVer}\nCurrent Branch: Stable(github)\nPing: ${timeTaken}ms\nHosted with: node.js, discord.js and repl.it\nPrefixes: ${prefix}`)
+        const botInfoEmbed = new Discord.MessageEmbed().setColor('#FF0057').setTitle(`StationBot ${config.botVer}`).setURL('https://stationarystation.github.io/StationBot/').setAuthor('stationBot', 'https://raw.githubusercontent.com/stationaryStation/StationBot/master/ProfilePictures/V2%20(Account).png', 'https://stationarystation.github.io/StationBot/'.setDescription(`StationBot by stationaryStation\nA bot for moderation made with the powerful discord.js engine.`).setThumbnail('https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png')
+        ,message.channel.send(botInfoEmbed))
     }
     // Lists server info
     if (command === "serverinfo") {
@@ -114,8 +117,10 @@ client.on("message", function (message) {
         } else if (cmd === "devmedia") {
             message.channel.send(`${prefix}devmedia\nUsage: Lists stationaryStation's social media`);
         } else if (cmd === "" && config.stable == false) {
+            // if no command was imputed, list all stable and unstable commands
             message.channel.send(`Commands:\ndevmedia\nboop\nchangenick\nchangeusernick\npootisfy\nban\nhelp\nrestart\nshutdown\nping\nkick`);
         } else if (cmd === "" && config.stable == true) {
+            // if no command was imputed, List all stable commands
             message.channel.send(`Commands:\ndevmedia\nboop\nchangenick\nchangeusernick\nban\nhelp\nrestart\nshutdown\nping\nkick`);
         } else if (cmd === "math") {
             message.channel.send(`${prefix}math\nInfo: Calculate simple operations\nUsage: \`\`\`${prefix}math <op> <num1> <num2>\`\`\`\nArguments:\n Op: add, sub, div, multi, pow, root\n Num1: Insert a number\n Num2: Insert A number `)
@@ -201,22 +206,27 @@ client.on("message", function (message) {
     }
     // Math command
     if (command === 'math'){
+        // Add variables for operations
         let op = args[0]
         let num1 = args[1]
         let num2 = args[2]
 
+        // Make integer variables
         let parseNum1 = parseInt(num1)
         let parseNum2 = parseInt(num2)
-
+        // Add answer variable
         let ans
-
+        
+        // If there is no operation, send the available operations and cancel request
         if (!op) {
-            message.channel.send("You need to specify the operation and the operands.");
+            message.channel.send(`You need to specify the operation and the operands.\nAvailable Operations:\n sum\n res\n div\n multi\n pow\n root`);
         } else {
             if (op === "add"){
                 if(!args[1] || !args[2]) {
+                    // Send that you didn't specify num1 and num2
                     message.channel.send("You need to specify the operands.");
                 } else {
+                    // Send the answer after parsing num1 and num2
                     ans = parseNum1 + parseNum2
                     message.channel.send(`Your answer is: ${ans}`)
                 }
@@ -278,6 +288,7 @@ client.on("message", function (message) {
 }); 
 // After that, login to the bot account.
 client.login(config.BOT_TOKEN);
+
 // Change bot's avatar and Username from config.json WIP
 // client.user.setAvatar('https://raw.githubusercontent.com/stationaryStation/StationBot/master/ProfilePictures/V2%20(Account).png');
 // client.user.setUsername(config.botUsername)
