@@ -36,6 +36,7 @@ client.on("message", function (message) {
     const command = args.shift().toLowerCase();
     // lists bot info
     if (command === "botinfo") {
+        // Create a Embed message with bot information
         const botInfoEmbed = new Discord.MessageEmbed()
 	.setColor('#FF0057')
 	.setTitle(`StationBot ${config.botVer}`)
@@ -43,11 +44,18 @@ client.on("message", function (message) {
 	.setAuthor('stationaryStation', 'https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png', 'https://github.com/stationaryStation')
 	.setDescription(`StationBot by stationaryStation\nA bot for moderation made with the powerful discord.js engine.`)
 	.setThumbnail('https://raw.githubusercontent.com/stationaryStation/StationBot/master/ProfilePictures/V2%20(Account).png')
+        // Then send the embed to the user's channel
         message.channel.send(botInfoEmbed)
     }
     // Lists server info
     if (command === "serverinfo") {
-        message.channel.send(`Server name: ${message.guild.name}\n Total Members: ${message.guild.memberCount}\n`)
+        const serverInfoEmbed = new Discord.MessageEmbed()
+    .setColor('#FF0057')
+    .setTitle(`Server Information`)
+    .setAuthor(`stationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+    .setDescription(`Server Name: ${message.guild.name}\nTotal Members: ${message.guild.memberCount}`)
+    .setThumbnail(``)
+        message.channel.send(serverInfoEmbed)
     }
     // test if the bot works
     if (command === "test") {
