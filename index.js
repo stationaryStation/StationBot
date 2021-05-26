@@ -3,6 +3,8 @@ const Discord = require('discord.js');
 const config = require('./config.json');
 const client = new Discord.Client();
 const prefix = config.prefix
+const fetch = require('node-fetch')
+const querystring = require('querystring')
 // When the bot is ready, the presence is set to the help command.
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}.\n Ver: ${config.botVer}\n Prefix: ${prefix}`);
@@ -26,17 +28,11 @@ client.on('ready', () => {
   
 });
 // When a message is sended in a guild(Server), it will be logged on the console/output
-client.on('message', message => {
-  console.log(`${message.author.tag} at ${message.guild.name} said: ${message.content}\n`);
-});
-client.on("message", function (message) {
-    if (message.author.bot) return;
-    // if there isn't an author, return
-    if (!message.content.startsWith(prefix)) return; 
-    // if no prefix was on the message, return
+client.on("message", async message => {
+    console.log(`${message.author.tag} at ${message.guild.name} said: ${message.content}\n`);
 
-    const commandBody = message.content.slice(prefix.length);
-    const args = commandBody.split(' ');
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
+    const args = message.content.slice(prefix.length).trim().split(/ +/);
     const command = args.shift().toLowerCase();
     // lists bot info
     if (command === ""){
@@ -462,6 +458,25 @@ client.on("message", function (message) {
                     .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Info.png`)
                     message.channel.send(Changelog)
     }
+    if (command === "cat"){
+        const { file } = await fetch('https://aws.random.cat/meow').then(response => response.json());
+        message.channel.send(file);
+    }
+    if (command == "urban"){
+        if (!args.length) {
+			return message.channel.send('You need to supply a search term!');
+		}
+
+		const query = querystring.stringify({ term: args.join(' ') });
+
+		const { list } = await fetch(`https://api.urbandictionary.com/v0/define?${query}`)
+			.then(response => response.json());
+            if (!list.length) {
+                return message.channel.send(`No results found for **${args.join(' ')}**.`);
+            }
+            message.channel.send(list[0].definition);
+	}
+    
     
 
 }); 
