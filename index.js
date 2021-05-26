@@ -454,7 +454,8 @@ client.on("message", async message => {
                     .setColor('#FF0057')
                     .setTitle(`StationBot Changelog`)
                     .setAuthor(`stationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
-                    .setDescription(`Ver ${config.botVer}:\nAdded Embeds in some commands\nAdded st!changelog\nAdded EmbedIcons designed by stationaryStation`)
+                    .setDescription(`Ver ${config.botVer}:\nAdded Embeds in some commands\nAdded st!changelog\nAdded EmbedIcons designed by stationaryStation\nAdded st!cat to fetch cat images <3\nAdded st!urban to search up something in the urban dictionary`)
+                    .setFooter('This bot is running in the NexT branch.')
                     .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Info.png`)
                     message.channel.send(Changelog)
     }
