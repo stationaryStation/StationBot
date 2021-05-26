@@ -125,35 +125,130 @@ client.on("message", function (message) {
     if (command === "help") {
         const cmd = message.content.replace(`${prefix}help`,'').split(' ').pop().trim();
         if (cmd === "kick" ) {
-            message.channel.send(`${prefix}kick <username>\nUsage: Kicks the user that you mentioned. `);
+            const HelpEmbed = new Discord.MessageEmbed()
+                    .setColor('#FF0057')
+                    .setTitle(`Help Menu: Kick`)
+                    .setAuthor(`StationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+                    .setDescription(`Usage:\nKicks the mentioned user from the server/guild\nSyntax:\n${prefix}kick <user>\nPermissions: Be an Admin.`)
+                    .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Help.png`)
+            message.channel.send(HelpEmbed)
         } else if (cmd ==="ping" ) {
-            message.channel.send(`${prefix}ping\nUsage: The bot replies to you with your current ping.`);
+            const HelpEmbed = new Discord.MessageEmbed()
+                    .setColor('#FF0057')
+                    .setTitle(`Help Menu: Ping`)
+                    .setAuthor(`StationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+                    .setDescription(`Usage:\nTells you your current ping.\nSyntax:\n${prefix}ping`)
+                    .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Help.png`)
+            message.channel.send(HelpEmbed)
         } else if (cmd === "shutdown") {
+            const HelpEmbed = new Discord.MessageEmbed()
+                    .setColor('#FF0057')
+                    .setTitle(`Help Menu: Shutdown`)
+                    .setAuthor(`StationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+                    .setDescription(`Usage:\nAlso Kills the bot\nSyntax:\n${prefix}shutdown\nPermissions:\nDeveloper Only`)
+                    .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Help.png`)
+            message.channel.send(HelpEmbed)
             message.channel.send(`${prefix}shutdown\nUsage: Shutdowns the bot.\n Requirements: Be the dev`);
         } else if (cmd === "restart") {
+            const HelpEmbed = new Discord.MessageEmbed()
+                    .setColor('#FF0057')
+                    .setTitle(`Help Menu: Restart`)
+                    .setAuthor(`StationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+                    .setDescription(`Usage:\nkills the bot.\nSyntax:\n${prefix}restart`)
+                    .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Help.png`)
+            message.channel.send(HelpEmbed)
             message.channel.send(`${prefix}restart\nUsage: Restarts the bot`);
         } else if (cmd === "help") {
-            message.channel.send(`${prefix}help <command>\nUsage: Lists all current commands`);
+            const HelpEmbed = new Discord.MessageEmbed()
+                    .setColor('#FF0057')
+                    .setTitle(`Help Menu: Help`)
+                    .setAuthor(`StationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+                    .setDescription(`"Why the fuck do you need help with the help command?" - StationaryStation\n\nUsage:\nHelps You :/\nSyntax:\n${prefix}help <command>`)
+                    .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Help.png`)
+            message.channel.send(HelpEmbed)
         } else if (cmd === "ban") {
+            const HelpEmbed = new Discord.MessageEmbed()
+                    .setColor('#FF0057')
+                    .setTitle(`Help Menu: Ban`)
+                    .setAuthor(`StationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+                    .setDescription(`Usage:\nBans a mentioned user permanently.\nSyntax:\n${prefix}ban <user>\nPermissions:\nBe an admin.`)
+                    .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Help.png`)
+            message.channel.send(HelpEmbed)
             message.channel.send(`${prefix}ban <UserID/User>\nUsage: Bans the user mentioned permanently\nRequirements: Be an admin`);
         } else if (cmd === "pootisfy" && config.stable == false) {
-            message.channel.send(`${prefix}pootisfy\n Usage: Changes your nickname to pootis\nRequirements: You need to not have the manage nicknames permission and the change nickname permission`);
+            const HelpEmbed = new Discord.MessageEmbed()
+                    .setColor('#FF0057')
+                    .setTitle(`Help Menu: Pootisfy`)
+                    .setAuthor(`StationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+                    .setDescription(`Usage: Changes your server nickname to pootis.\nSyntax: ${prefix}pootisfy <nickname>\nPermissions:\nYour admin should eliminate the changeNickname and manageNicknames permission.`)
+                    .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Help.png`)
+            message.channel.send(HelpEmbed)
         } else if (cmd === "changeusernick") {
-            message.channel.send(`${prefix}changeusernick <user> <nick>\nUsage: Changes the nickname of the user mentioned to whatever you like`);
+            const HelpEmbed = new Discord.MessageEmbed()
+                    .setColor('#FF0057')
+                    .setTitle(`Help Menu: Change Others Nickname`)
+                    .setAuthor(`StationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+                    .setDescription(`Usage: Changes others server nickname.\nSyntax: ${prefix}changeusernick <user> <nickname>\nPermissions:\nYour admin should eliminate the changeNickname and manageNicknames permission.`)
+                    .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Help.png`)
+            message.channel.send(HelpEmbed)
         } else if (cmd === "changenick") {
-            message.channel.send(`${prefix}changenick <nick>\nUsage: Changes your nickname to whatever you like\nRequirements: You need to not have nor the manage nicknames permission and the change nickname permission `);
+            const HelpEmbed = new Discord.MessageEmbed()
+                    .setColor('#FF0057')
+                    .setTitle(`Help Menu: Change Your Nickname`)
+                    .setAuthor(`StationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+                    .setDescription(`Usage: Changes your server nickname.\nSyntax: ${prefix}changenick <nickname>\nPermissions:\nYour admin should eliminate the changeNickname and manageNicknames permission.`)
+                    .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Help.png`)
+            message.channel.send(HelpEmbed)
         } else if (cmd === "boop"){
-            message.channel.send(`${prefix}boop <user>\n Usage: Boops the mentioned user`);
+            const HelpEmbed = new Discord.MessageEmbed()
+                    .setColor('#FF0057')
+                    .setTitle(`Help Menu: Boop`)
+                    .setAuthor(`StationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+                    .setDescription(`Usage:\nBoops The mentioned user.\nSyntax:\n${prefix}boop <user>`)
+                    .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Help.png`)
+            message.channel.send(HelpEmbed)
         } else if (cmd === "devmedia") {
-            message.channel.send(`${prefix}devmedia\nUsage: Lists stationaryStation's social media`);
+            const HelpEmbed = new Discord.MessageEmbed()
+                    .setColor('#FF0057')
+                    .setTitle(`Help Menu: Developer Media`)
+                    .setAuthor(`StationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+                    .setDescription(`Usage:\nLists stationaryStation's social media profiles.`)
+                    .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Help.png`)
+            message.channel.send(HelpEmbed)
         } else if (cmd === "" && config.stable == false) {
+            const HelpEmbed = new Discord.MessageEmbed()
+                    .setColor('#FF0057')
+                    .setTitle(`Help Menu`)
+                    .setAuthor(`StationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+                    .setDescription(`Commands:\ndevmedia\nboop\nchangenick\nchangeusernick\nban\nhelp\nrestart\nshutdown\nping\nkick`)
+                    .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Help.png`)
+            message.channel.send(HelpEmbed)
             // if no command was imputed, list all stable and unstable commands
-            message.channel.send(`Commands:\ndevmedia\nboop\nchangenick\nchangeusernick\npootisfy\nban\nhelp\nrestart\nshutdown\nping\nkick`);
         } else if (cmd === "" && config.stable == true) {
-            // if no command was imputed, List all stable commands
-            message.channel.send(`Commands:\ndevmedia\nboop\nchangenick\nchangeusernick\nban\nhelp\nrestart\nshutdown\nping\nkick`);
-        } else if (cmd === "math") {
-            message.channel.send(`${prefix}math\nInfo: Calculate simple operations\nUsage: \`\`\`${prefix}math <op> <num1> <num2>\`\`\`\nArguments:\n Op: add, sub, div, multi, pow, root\n Num1: Insert a number\n Num2: Insert A number `)
+            const HelpEmbed = new Discord.MessageEmbed()
+                    .setColor('#FF0057')
+                    .setTitle(`Help Menu`)
+                    .setAuthor(`StationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+                    .setDescription(`Commands:\ndevmedia\nboop\nchangenick\nchangeusernick\nban\nhelp\nrestart\nshutdown\nping\nkick`)
+                    .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Help.png`)
+                    message.channel.send(HelpEmbed)
+        }else if (cmd === "" && config.branchNext == true){
+            const HelpEmbed = new Discord.MessageEmbed()
+                    .setColor('#FF0057')
+                    .setTitle(`Help Menu`)
+                    .setAuthor(`StationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+                    .setDescription(`Commands:\ndevmedia\nboop\nchangenick\nchangeusernick\nban\nhelp\nrestart\nshutdown\nping\nkick`)
+                    .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Help.png`)
+            message.channel.send(HelpEmbed)
+        }
+         else if (cmd === "math") {
+        const HelpEmbed = new Discord.MessageEmbed()
+            .setColor('#FF0057')
+            .setTitle(`Help Menu: Math`)
+            .setAuthor(`StationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+            .setDescription(`Usage:\nCalculates simple operations\nSyntax:\n${prefix}math <op> <num1> <num2>\nArguments:\n Op:\n  ADD\n  SUB\n  MULTI\n  DIV\n  POW\n  ROOT\n  MOD\n Num1:\n  Number\n Num2:\n  Number`)
+            .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Help.png`)
+        message.channel.send(HelpEmbed)
         }
        
     }
