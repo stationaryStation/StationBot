@@ -387,13 +387,13 @@ client.on("message", function (message) {
                 if(!args[1] || !args[2]) {
                     message.channel.send("You need to specify the operands.");
                 } else{
+                    ans = parseNum1 - parseNum2
                     const SubAnswer = new Discord.MessageEmbed()
                     .setColor('#FF0057')
                     .setTitle(`Math`)
                     .setAuthor(`stationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
                     .setDescription(`Your Answer is: ${ans}`)
                     .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Math%20-%20%20Minus.png`)
-                    ans = parseNum1 - parseNum2
                     message.channel.send(SubAnswer)
                 }
 
@@ -401,13 +401,13 @@ client.on("message", function (message) {
                 if(!args[1] || !args[2]) {
                     message.channel.send("You need to specify the operands.");
                 } else {
+                    ans = parseNum1 * parseNum2
                     const MultiAnswer = new Discord.MessageEmbed()
                     .setColor('#FF0057')
                     .setTitle(`Math`)
                     .setAuthor(`stationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
                     .setDescription(`Your Answer is: ${ans}`)
                     .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Math%20-%20%20Multi.png`)
-                    ans = parseNum1 * parseNum2
                     message.channel.send(MultiAnswer)
                 }
 
@@ -415,13 +415,13 @@ client.on("message", function (message) {
                 if(!args[1] || !args[2]) {
                     message.channel.send("You need to specify the operands.");
                 } else {
+                    ans = parseNum1 / parseNum2
                     const DivAnswer = new Discord.MessageEmbed()
                     .setColor('#FF0057')
                     .setTitle(`Math`)
                     .setAuthor(`stationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
                     .setDescription(`Your Answer is: ${ans}`)
                     .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Math%20-%20%20Div.png`)
-                    ans = parseNum1 / parseNum2
                     message.channel.send(DivAnswer)
                 }
 
