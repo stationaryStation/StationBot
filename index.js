@@ -39,6 +39,15 @@ client.on("message", function (message) {
     const args = commandBody.split(' ');
     const command = args.shift().toLowerCase();
     // lists bot info
+    if (command === ""){
+        const InvalidEmbed = new Discord.MessageEmbed()
+                    .setColor('#FF0057')
+                    .setTitle(`Invalid Command`)
+                    .setAuthor(`StationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+                    .setDescription(`Sorry, You need to enter a valid Command :(`)
+                    .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20InvalidCommand.png`)
+            message.channel.send(InvalidEmbed)
+    }
     if (command === "botinfo") {
         // Create a Embed message with bot information
         const botInfoEmbed = new Discord.MessageEmbed()
