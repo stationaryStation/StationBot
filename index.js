@@ -15,6 +15,10 @@ client.on('ready', () => {
     client.user.setActivity(`${prefix}help for command list. | Using Unstable Branch`, {
         type: 'LISTENING'
      });
+  }else if (config.branchNext == true){
+    client.user.setActivity(`${prefix}help for command list. | Using Next Branch`, {
+        type: 'LISTENING'
+     });
   } else {
       // This is just in case of the bot breaking.
       console.error("An unexpected error has ocurred. Please report the issue to https://github.com/stationaryStation/stationBot/issues");
@@ -43,7 +47,7 @@ client.on("message", function (message) {
 	.setURL('https://github.com/stationaryStation/stationBot')
 	.setAuthor('stationaryStation', 'https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png', 'https://github.com/stationaryStation')
 	.setDescription(`StationBot by stationaryStation\nA bot for moderation made with the powerful discord.js engine.`)
-	.setThumbnail('https://raw.githubusercontent.com/stationaryStation/StationBot/master/ProfilePictures/V2%20(Account).png')
+	.setThumbnail('https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Info.png')
         // Then send the embed to the user's channel
         message.channel.send(botInfoEmbed)
     }
@@ -54,17 +58,29 @@ client.on("message", function (message) {
     .setTitle(`Server Information`)
     .setAuthor(`stationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
     .setDescription(`Server Name: ${message.guild.name}\nTotal Members: ${message.guild.memberCount}`)
-    .setThumbnail(``)
+    .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20SeverInfo.png`)
         message.channel.send(serverInfoEmbed)
     }
     // test if the bot works
     if (command === "test") {
-        message.reply('Hello World!');
+        const TestEmbed = new Discord.MessageEmbed()
+    .setColor('#FF0057')
+    .setTitle(`Test Embed`)
+    .setAuthor(`stationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+    .setDescription(`Testing Embeds and messages`)
+    .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Test.png`)
+    message.channel.send(TestEmbed)
     }
     // Ping Command
     if (command === "ping") {
         const timeTaken = Date.now() - message.createdTimestamp;
-        message.reply(`Pong! This message had a latency of ${timeTaken}ms.`);
+        const PingEmbed = new Discord.MessageEmbed()
+    .setColor('#FF0057')
+    .setTitle(`Pong!`)
+    .setAuthor(`stationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+    .setDescription(`Your current ping is: ${timeTaken}`)
+    .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Ping.png`)
+        message.channel.send(PingEmbed);
     }
     // Kick Command
     if (command === "kick") {
@@ -194,9 +210,21 @@ client.on("message", function (message) {
     if (command === "boop") {
         const userToPing = message.mentions.members.first()
         if (userToPing){
-            message.channel.send(`${userToPing}, Boop! ;p`);
+            const BoopSuccessful = new Discord.MessageEmbed()
+            .setColor('#FF0057')
+            .setTitle(`Boop!`)
+            .setAuthor(`stationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+            .setDescription(`${userToPing}, you Have been booped! ;p`)
+            .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Boop.png`)
+            message.channel.send(BoopSuccessful)
         } else {
-            message.reply(`I can't boop the void! >:(\n So please mention a user goddamit. `);
+            const BoopFailed = new Discord.MessageEmbed()
+    .setColor('#FF0057')
+    .setTitle(`>:(`)
+    .setAuthor(`stationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+    .setDescription(`Please mention a user to ping/boop.`)
+    .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Boop.png`)
+    message.channel.send(BoopFailed)
         }
     }
     // Issue command, unstable mode only
@@ -242,31 +270,55 @@ client.on("message", function (message) {
                 } else {
                     // Send the answer after parsing num1 and num2
                     ans = parseNum1 + parseNum2
-                    message.channel.send(`Your answer is: ${ans}`)
+                    const SumAnswer = new Discord.MessageEmbed()
+                    .setColor('#FF0057')
+                    .setTitle(`Math`)
+                    .setAuthor(`stationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+                    .setDescription(`Your Answer is: ${ans}`)
+                    .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Math%20-%20%20Plus.png`)
+                    message.channel.send(SumAnswer)
                 }
 
             } else if(op === "sub"){
                 if(!args[1] || !args[2]) {
                     message.channel.send("You need to specify the operands.");
                 } else{
+                    const SubAnswer = new Discord.MessageEmbed()
+                    .setColor('#FF0057')
+                    .setTitle(`Math`)
+                    .setAuthor(`stationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+                    .setDescription(`Your Answer is: ${ans}`)
+                    .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Math%20-%20%20Minus.png`)
                     ans = parseNum1 - parseNum2
-                    message.channel.send(`Your answer is: ${ans}`)
+                    message.channel.send(SubAnswer)
                 }
 
             } else if(op === "multi"){
                 if(!args[1] || !args[2]) {
                     message.channel.send("You need to specify the operands.");
                 } else {
+                    const MultiAnswer = new Discord.MessageEmbed()
+                    .setColor('#FF0057')
+                    .setTitle(`Math`)
+                    .setAuthor(`stationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+                    .setDescription(`Your Answer is: ${ans}`)
+                    .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Math%20-%20%20Multi.png`)
                     ans = parseNum1 * parseNum2
-                    message.channel.send(`Your answer is: ${ans}`)
+                    message.channel.send(MultiAnswer)
                 }
 
             } else if(op === "div"){
                 if(!args[1] || !args[2]) {
                     message.channel.send("You need to specify the operands.");
                 } else {
+                    const DivAnswer = new Discord.MessageEmbed()
+                    .setColor('#FF0057')
+                    .setTitle(`Math`)
+                    .setAuthor(`stationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+                    .setDescription(`Your Answer is: ${ans}`)
+                    .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Math%20-%20%20Div.png`)
                     ans = parseNum1 / parseNum2
-                    message.channel.send(`Your answer is: ${ans}`)
+                    message.channel.send(DivAnswer)
                 }
 
             }else if(op === "mod"){
@@ -296,6 +348,15 @@ client.on("message", function (message) {
             }
         }
 
+    }
+    if (command === "changelog") {
+        const Changelog = new Discord.MessageEmbed()
+                    .setColor('#FF0057')
+                    .setTitle(`StationBot Changelog`)
+                    .setAuthor(`stationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+                    .setDescription(`Ver ${config.botVer}:\nAdded Embeds in some commands\nAdded st!changelog\nAdded EmbedIcons designed by stationaryStation`)
+                    .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Info.png`)
+                    message.channel.send(Changelog)
     }
     
 
