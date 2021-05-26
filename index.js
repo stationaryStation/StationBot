@@ -477,14 +477,15 @@ client.on("message", async message => {
             const [answer] = list;
             const trim = (str, max) => ((str.length > max) ? `${str.slice(0, max - 3)}...` : str);
         const embed = new Discord.MessageEmbed()
-	.setColor('#EFFF00')
+	.setColor('#FF0057')
 	.setTitle(answer.word)
 	.setURL(answer.permalink)
 	.addFields(
 		{ name: 'Definition', value: trim(answer.definition, 1024) },
 		{ name: 'Example', value: trim(answer.example, 1024) },
 		{ name: 'Rating', value: `${answer.thumbs_up} thumbs up. ${answer.thumbs_down} thumbs down.` },
-        );
+        )
+    .setThumbnail('https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Urban.png');
 
         message.channel.send(embed);
 
