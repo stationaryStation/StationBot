@@ -516,9 +516,13 @@ client.on("message", async message => {
             let response = await fetch(url);
             let json = await response.json();
             const index = Math.floor(Math.random() * json.results.length);
-            message.channel.send(json.results[index].url);
-
-
+            const SearchConcluded = new Discord.MessageEmbed()
+            .setColor('#FF0057')
+            .setTitle(`${searchTerm}`)
+            .setAuthor(`stationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+            .setFooter('Powered by Tenor')
+            .setThumbnail(`${json.results[index].url}`)
+            message.channel.send(SearchConcluded);
         }
     }
     
