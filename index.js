@@ -521,7 +521,7 @@ client.on("message", async message => {
             .setTitle(`${searchTerm}`)
             .setAuthor(`stationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
             .setFooter('Powered by Tenor')
-            .setThumbnail(`${json.results[index].url}`)
+            .setThumbnail(json.results[index].url)
             message.channel.send(SearchConcluded);
         }
     }
