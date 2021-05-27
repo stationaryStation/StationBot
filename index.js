@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
-// Required variables
 const config = require('./config.json');
+// Required variables
 const client = new Discord.Client();
 const prefix = config.prefix
 const fetch = require('node-fetch')
@@ -491,6 +491,27 @@ client.on("message", async message => {
         message.channel.send(embed);
 
 	}
+    if (command === "tenor") {
+        const searchTerm = args[0]
+        if (!searchTerm){
+            const SearchFailed = new Discord.MessageEmbed()
+                    .setColor('#FF0057')
+                    .setTitle(`Oops!`)
+                    .setAuthor(`stationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+                    .setDescription(`Your search term is misssing, please insert a valid search tearm.`)
+                    .setFooter('Error 1')
+                    .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Info.png`)
+                    message.channel.send(SearchFailed);
+        } else {
+            let url = `https://g.tenor.com/v1/search?q=${searchTerm}&key=${config.TENOR_KEY}&limit=8`
+            let response = await fetch(url);
+            let json = await response.json();
+            const index = Math.floor(Math.random() * json.results.length);
+            message.channel.send(json.results[index].url);
+
+
+        }
+    }
     
     
 
