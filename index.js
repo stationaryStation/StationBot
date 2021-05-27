@@ -254,6 +254,14 @@ client.on("message", async message => {
             .setDescription(`Usage:\nCalculates simple operations\nSyntax:\n${prefix}math <op> <num1> <num2>\nArguments:\n Op:\n  ADD\n  SUB\n  MULTI\n  DIV\n  POW\n  ROOT\n  MOD\n Num1:\n  Number\n Num2:\n  Number`)
             .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Help.png`)
         message.channel.send(HelpEmbed)
+        } else if (cmd === "tenor"){
+            const HelpEmbed = new Discord.MessageEmbed()
+            .setColor('#FF0057')
+            .setTitle(`Help Menu: Tenor`)
+            .setAuthor(`StationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+            .setDescription(`Usage:\nSearches a gif in tenor.com\nSyntax:\n${prefix}tenor <searchTerm>`)
+            .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Help.png`)
+        message.channel.send(HelpEmbed)
         }
        
     }
@@ -493,6 +501,7 @@ client.on("message", async message => {
 	}
     if (command === "tenor") {
         const searchTerm = args[0]
+        // searchTerm is a argument which means that the syntax is st!tenor <searchTerm>
         if (!searchTerm){
             const SearchFailed = new Discord.MessageEmbed()
                     .setColor('#FF0057')
