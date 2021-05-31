@@ -3,8 +3,19 @@ const config = require('./config.json');
 // Required variables
 const client = new Discord.Client();
 const prefix = config.prefix
-const fetch = require('node-fetch')
-const querystring = require('querystring')
+const fetch = require('node-fetch');
+const querystring = require('querystring');
+
+function GetQuote() {
+    return fetch("https://zenquotes.io/api/random")
+    // Get A quote from zenquotes and send data to a json file.
+    .then(res => {
+      return res.json()
+      })
+    .then(data => {
+      return data[0]["q"] + " -" + data[0]["a"]
+    })
+}
 // When the bot is ready, the presence is set to the help command.
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}.\n Ver: ${config.botVer}\n Prefix: ${prefix}`);
@@ -180,7 +191,7 @@ client.on("message", async message => {
                     .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Help.png`)
             message.channel.send(HelpEmbed)
             message.channel.send(`${prefix}ban <UserID/User>\nUsage: Bans the user mentioned permanently\nRequirements: Be an admin`);
-        } else if (cmd === "pootisfy" && config.stable == false) {
+        } else if (cmd === "pootisfy" && config.stable == false ||cmd === "pootisfy" && config.branchNext == true) {
             const HelpEmbed = new Discord.MessageEmbed()
                     .setColor('#FF0057')
                     .setTitle(`Help Menu: Pootisfy`)
@@ -245,8 +256,7 @@ client.on("message", async message => {
                     .setDescription(`Commands:\ndevmedia\nboop\nchangenick\nchangeusernick\nban\nhelp\nrestart\nshutdown\nping\nkick`)
                     .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Help.png`)
             message.channel.send(HelpEmbed)
-        }
-         else if (cmd === "math") {
+        }else if (cmd === "math") {
         const HelpEmbed = new Discord.MessageEmbed()
             .setColor('#FF0057')
             .setTitle(`Help Menu: Math`)
@@ -518,6 +528,10 @@ client.on("message", async message => {
             const index = Math.floor(Math.random() * json.results.length);
             message.channel.send(json.results[index].url);
         }
+    }
+    if (command === "inspire"){
+        // Fetch a random quote from zenquotes's api. Then, send it. 
+        GetQuote().then(quote => message.channel.send(quote))
     }
     
     
