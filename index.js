@@ -32,9 +32,14 @@ client.on('ready', () => {
     client.user.setActivity(`${prefix}help for command list. | Using Next Branch`, {
         type: 'LISTENING'
      });
+  }else if (config.PreRelease == true){
+    client.user.setActivity(`${prefix}help for command list. | Pre-Release`, {
+        type: 'LISTENING'
+     });
   } else {
       // This is just in case of the bot breaking.
       console.error("An unexpected error has ocurred. Please report the issue to https://github.com/stationaryStation/stationBot/issues");
+      process.exit();
   }
   
 });
@@ -64,6 +69,7 @@ client.on("message", async message => {
 	.setAuthor('stationaryStation', 'https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png', 'https://github.com/stationaryStation')
 	.setDescription(`StationBot by stationaryStation\nA bot for moderation made with the powerful discord.js engine.`)
 	.setThumbnail('https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Info.png')
+    .setFooter('This is pre-release software, this might be unstable at times. Please refer to github.com/stationaryStation/StationBot/issues to report any bug.')
         // Then send the embed to the user's channel
         message.channel.send(botInfoEmbed)
     }
@@ -510,7 +516,7 @@ client.on("message", async message => {
 
 	}
     if (command === "tenor") {
-        const searchTerm = args[0]
+        const searchTerm = args.join(' ')
         // searchTerm is a argument which means that the syntax is st!tenor <searchTerm>
         if (!searchTerm){
             const SearchFailed = new Discord.MessageEmbed()
@@ -521,12 +527,14 @@ client.on("message", async message => {
                     .setFooter('Error 1')
                     .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Info.png`)
                     message.channel.send(SearchFailed);
+                    console.log(`${message.author.tag} searched on tenor ${searchTerm} but failed.`)
         } else {
             let url = `https://g.tenor.com/v1/search?q=${searchTerm}&key=${config.TENOR_KEY}&limit=8`
             let response = await fetch(url);
             let json = await response.json();
             const index = Math.floor(Math.random() * json.results.length);
             message.channel.send(json.results[index].url);
+            console.log(`${message.author.tag} searched on tenor ${searchTerm}.`)
         }
     }
     if (command === "inspire"){
