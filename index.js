@@ -63,7 +63,7 @@ client.on("message", async message => {
     // lists bot info
     if (command === "botinfo") {
         // Create a Embed message with bot information
-        const timeTaken = time.now() - message.createdTimestamp();
+        const timeTaken = Date.now() - message.createdTimestamp();
         const botInfoEmbed = new Discord.MessageEmbed()
 	.setColor('#FF0057')
 	.setTitle(`StationBot ${config.botVer}`)
