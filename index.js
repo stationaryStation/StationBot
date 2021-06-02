@@ -15,8 +15,6 @@ for (const folder of commandFolders) {
 	}
 }
 const prefix = config.prefix
-const fetch = require('node-fetch');
-const querystring = require('querystring');
 // When the bot is ready, the presence is set to the help command.
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}.\n Ver: ${config.botVer}\n Prefix: ${prefix}`);
@@ -60,79 +58,9 @@ client.on("message", async message => {
 		client.commands.get(command).execute(message, args, botVer, prefix);
 	} catch (error) {
 		console.error(error);
-		message.reply('there was an error trying to execute that command!');
+		message.reply('There was an error trying to execute that command!');
 	}
 });
-    // test if the bot works
-    if (command === "test") {
-       
-    }
-    // Kick Command
-    if (command === "kick") {
-        const user = message.mentions.users.first();
-        if (user) {
-            const member = message.guild.member(user);
-            if (member) {
-                member.kick('Someone was kicked using st!kick').then(() => {
-                    message.reply(`Successfully kicked ${user.tag} `)
-                }).catch(err => {
-                    message.reply(`Failed to kick ${user.tag}. Do i got the necessary permissions?`);
-                    console.error(err);
-                });
-            } else {
-                message.reply("That user isn't in this server!");
-            }
-        } else {
-            message.reply("You didn't mention the user to kick!")
-        }
-    }
-    // ban command
-    if (command === "ban") {
-        const user = message.mentions.users.first();
-            if (user) {
-                const member = message.guild.member(user);
-                if (member) {
-                    member.ban('Someone was banned using st!ban').then(() => {
-                        message.reply(`Successfully ban ${user.tag} `)
-                    }).catch(err => {
-                        message.reply(`Failed to ban ${user.tag}. Do i got the necessary permissions?`);
-                        console.error(err);
-                    });
-                } else {
-                    message.reply("That user isn't in this guild!");
-                }
-            } else {
-                message.reply("You didn't mention the user to ban!");
-            }
-        } 
-    if (command == "urban"){
-        if (!args.length) {
-			return message.channel.send('You need to supply a search term!');
-		}
-
-		const query = querystring.stringify({ term: args.join(' ') });
-
-		const { list } = await fetch(`https://api.urbandictionary.com/v0/define?${query}`)
-			.then(response => response.json());
-            if (!list.length) {
-                return message.channel.send(`No results found for **${args.join(' ')}**.`);
-            }
-            const [answer] = list;
-            const trim = (str, max) => ((str.length > max) ? `${str.slice(0, max - 3)}...` : str);
-        const embed = new Discord.MessageEmbed()
-	.setColor('#FF0057')
-	.setTitle(answer.word)
-	.setURL(answer.permalink)
-	.addFields(
-		{ name: 'Definition', value: trim(answer.definition, 1024) },
-		{ name: 'Example', value: trim(answer.example, 1024) },
-		{ name: 'Rating', value: `${answer.thumbs_up} thumbs up. ${answer.thumbs_down} thumbs down.` },
-        )
-    .setThumbnail('https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Urban.png');
-
-        message.channel.send(embed);
-
-	}
 // After that, login to the bot account.
 client.login(config.BOT_TOKEN);
 
