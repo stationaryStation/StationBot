@@ -3,7 +3,8 @@ module.exports = {
     name: 'math',
     args: true,
     usage: '<operation> <num1> <num2>',
-    execute(message, args){
+    // eslint-disable-next-line no-unused-vars
+    execute(message, args, botVer, prefix){
          // Add variables for operations
          let op = args[0]
          let num1 = args[1]
@@ -29,7 +30,7 @@ module.exports = {
                      const SumAnswer = new Discord.MessageEmbed()
                      .setColor('#FF0057')
                      .setTitle(`Math`)
-                     .setAuthor(`stationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+                     .setAuthor(`stationBot ${botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
                      .setDescription(`Your Answer is: ${ans}`)
                      .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Math%20-%20%20Plus.png`)
                      message.channel.send(SumAnswer)
@@ -43,7 +44,7 @@ module.exports = {
                      const SubAnswer = new Discord.MessageEmbed()
                      .setColor('#FF0057')
                      .setTitle(`Math`)
-                     .setAuthor(`stationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+                     .setAuthor(`stationBot ${botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
                      .setDescription(`Your Answer is: ${ans}`)
                      .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Math%20-%20%20Minus.png`)
                      message.channel.send(SubAnswer)
@@ -57,7 +58,7 @@ module.exports = {
                      const MultiAnswer = new Discord.MessageEmbed()
                      .setColor('#FF0057')
                      .setTitle(`Math`)
-                     .setAuthor(`stationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+                     .setAuthor(`stationBot ${botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
                      .setDescription(`Your Answer is: ${ans}`)
                      .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Math%20-%20%20Multi.png`)
                      message.channel.send(MultiAnswer)
@@ -71,7 +72,7 @@ module.exports = {
                      const DivAnswer = new Discord.MessageEmbed()
                      .setColor('#FF0057')
                      .setTitle(`Math`)
-                     .setAuthor(`stationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+                     .setAuthor(`stationBot ${botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
                      .setDescription(`Your Answer is: ${ans}`)
                      .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Math%20-%20%20Div.png`)
                      message.channel.send(DivAnswer)

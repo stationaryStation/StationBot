@@ -3,18 +3,19 @@ module.exports = {
     name: 'botinfo',
     args: false,
     description: 'Displays information about the bot',
-    execute(message, args) {
+    // eslint-disable-next-line no-unused-vars
+    execute(message, args, botVer, prefix) {
          // Create a Embed message with bot information
          const timeTaken = Date.now() - message.createdTimestamp;
          const botInfoEmbed = new Discord.MessageEmbed()
      .setColor('#FF0057')
-     .setTitle(`StationBot ${config.botVer}`)
+     .setTitle(`StationBot ${botVer}`)
      .setURL('https://github.com/stationaryStation/stationBot')
      .setAuthor('stationaryStation', 'https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png', 'https://github.com/stationaryStation')
      .setDescription(`StationBot by stationaryStation\nA bot for moderation made with the powerful discord.js engine.`)
      .addFields(
          {name: 'Ping', value: `${timeTaken}`},
-         {name: 'Current Version', value: `${config.botVer}`},
+         {name: 'Current Version', value: `${botVer}`},
          {name: 'Github Branch', value: 'Pre-Release 1'}
      )
      .setThumbnail('https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Info.png')

@@ -2,11 +2,12 @@ const Discord = require('discord.js')
 module.exports = {
     name: 'changelog',
     args: false,
-    execute(message, args){
+    // eslint-disable-next-line no-unused-vars
+    execute(message, args, prefix, botVer){
         const changelog = new Discord.MessageEmbed()
         .setColor('#FF0057')
         .setTitle(`Changelog`)
-        .setAuthor(`stationBot ${config.botVer}`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
+        .setAuthor(`stationBot 1.2.0 Pre-Release 1`, `https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png`)
         .setDescription(`Pre-Release 1`)
         .addFields(
             {name: 'Re-writen the whole framework', value: 'Now instead of the bot consisting on one file, now the commands are divided on multiple files!'},
@@ -15,5 +16,6 @@ module.exports = {
             {name: 'Embeds, loads of them', value: 'Yay! Everyone\'s favorite way to send beautiful messages is now here!'}
         )
         .setThumbnail(`https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Math%20-%20%20Plus.png`)
+        message.channel.send(changelog)
     }
 }

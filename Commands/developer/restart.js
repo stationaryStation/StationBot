@@ -2,6 +2,7 @@ module.exports = {
     name: 'restart',
     args: false,
     description: 'Restarts the bot. Developer only',
+    // eslint-disable-next-line no-unused-vars
     execute(message, args){
         if (message.author.id === '567014451337887744') {
             message.channel.send('Goodbye...').then(sentMessage => {
