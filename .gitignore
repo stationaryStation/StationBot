@@ -9,3 +9,4 @@ package.json
 .vscode
 Discord Tokens.json
 token.json
+*.json
