@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const config = require('./config.json');
-const required = require('./token.json')
 const fs = require('fs');
 // Required variables
 const client = new Discord.Client();
@@ -363,7 +362,7 @@ client.on("message", async message => {
 
 }); 
 // After that, login to the bot account.
-client.login(required.BOT_TOKEN);
+client.login(config.BOT_TOKEN);
 
 // Change bot's avatar and Username from config.json WIP
 // client.user.setAvatar('https://raw.githubusercontent.com/stationaryStation/StationBot/master/ProfilePictures/V2%20(Account).png');
