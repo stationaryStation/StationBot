@@ -1,4 +1,4 @@
-const fetch = require('fetch')
+const fetch = require('node-fetch')
 const Discord = require('discord.js')
 const TENOR_KEY = "OBU9CHJJLKNM"
 module.exports = {
