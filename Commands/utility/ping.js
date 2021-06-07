@@ -1,4 +1,4 @@
-const Discord = require('Discord.js')
+const Discord = require('discord.js')
 module.exports = {
     name: 'Ping',
     description: 'Tells the User his ping with an embed',

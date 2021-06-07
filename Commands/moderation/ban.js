@@ -3,7 +3,7 @@ module.exports = {
     description: 'Bans the mentioned user',
     args: true,
     usage: '<user>',
-    cooldown: '10',
+    cooldown: 10,
     execute(message) {
         const user = message.mentions.users.first();
             if (user) {

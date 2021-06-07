@@ -6,7 +6,7 @@ module.exports = {
     description: 'Searches the urban dictionary',
     args: true,
     usage: '<searchTerm>',
-    cooldown: '5',
+    cooldown: 5,
     async execute(message, args) {
         if (!args.length) {
 			return message.channel.send('You need to supply a search term!');
