@@ -1,13 +1,17 @@
+// ./ProfilePictures/unstable.png
+// Add variables for libraries
 const Discord = require('discord.js');
 const config = require('./config.json');
 const fs = require('fs');
-const botVer = config.botVer;
+
 // Required variables
+const botVer = config.botVer;
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
 const commandFolders = fs.readdirSync('./Commands');
 
+// Search for commands
 for (const folder of commandFolders) {
 	const commandFiles = fs.readdirSync(`./Commands/${folder}`).filter(file => file.endsWith('.js'));
 	for (const file of commandFiles) {
@@ -15,9 +19,11 @@ for (const folder of commandFolders) {
 		client.commands.set(command.name, command);
 	}
 }
+// Set the prefix to the prefix you edited on config.json
 const prefix = config.prefix
 // When the bot is ready, the presence is set to the help command.
 client.on('ready', () => {
+  // Log the bot's tag, version and prefix 
   console.log(`Logged in as ${client.user.tag}.\n Ver: ${config.botVer}\n Prefix: ${prefix}`);
   console.log('Bot ready for operation.');
   if (config.stable == true){
@@ -44,6 +50,7 @@ client.on('ready', () => {
       process.exit();
   }
   
+  
 });
 // When a message is sended in a guild(Server), it will be logged on the console/output
 client.on("message", async message => {
@@ -52,7 +59,10 @@ client.on("message", async message => {
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const command = args.shift().toLowerCase();
-
+/* cooldowns are set with
+* /..
+* cooldown: <cooldown time (in seconds)>,
+*/
 	if (!client.commands.has(command)) return;
   const { cooldowns } = client;
 
@@ -89,5 +99,6 @@ client.login(config.BOT_TOKEN);
 
 
 // Change bot's avatar and Username from config.json WIP
-// client.user.setAvatar('https://raw.githubusercontent.com/stationaryStation/StationBot/master/ProfilePictures/V2%20(Account).png');
-// client.user.setUsername(config.botUsername)
+
+
+// bot.setUsername(config.botUsername)
