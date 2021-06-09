@@ -96,9 +96,3 @@ setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 });
 // After that, login to the bot account.
 client.login(config.BOT_TOKEN);
-
-
-// Change bot's avatar and Username from config.json WIP
-
-
-// bot.setUsername(config.botUsername)
