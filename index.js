@@ -88,10 +88,13 @@ setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 }
 
 	try {
+    // If the command exists, run it with the following variables (if required)
 		client.commands.get(command).execute(message, args, botVer, prefix, client);
 	} catch (error) {
+    // else if the command returns an error, notify the user.
 		console.error(error);
 		message.reply('There was an error trying to execute that command!');
+    message.channel.send(`\`\`\` ${error} \`\`\``)
 	}
 });
 // After that, login to the bot account.
