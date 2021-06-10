@@ -2,9 +2,11 @@ const Discord = require('discord.js')
 module.exports = {
     name: 'boop',
     description: 'Pings the user you mentioned',
+    args: true,
     usage: '<user>',
-    // eslint-disable-next-line no-unused-vars
-    execute(message, args, botVer, prefix){
+    cooldown: 15,
+    wip: false,
+    execute(message, botVer){
         const userToPing = message.mentions.members.first()
         if (userToPing){
             const BoopSuccessful = new Discord.MessageEmbed()

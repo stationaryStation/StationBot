@@ -3,8 +3,10 @@ module.exports = {
     name: 'botinfo',
     args: false,
     description: 'Displays information about the bot',
+    cooldown: 10,
+    wip: false,
     // eslint-disable-next-line no-unused-vars
-    execute(message, args, botVer, prefix) {
+    execute(message, botVer, prefix) {
          // Create a Embed message with bot information
          const timeTaken = Date.now() - message.createdTimestamp;
          const botInfoEmbed = new Discord.MessageEmbed()
@@ -16,7 +18,8 @@ module.exports = {
      .addFields(
          {name: 'Ping', value: `${timeTaken}`},
          {name: 'Current Version', value: `${botVer}`},
-         {name: 'Github Branch', value: 'Pre-Release 1'}
+         {name: 'Github Branch', value: 'Pre-Release 2'},
+         {name: 'Prefix:', value: `${prefix}`}
      )
      .setThumbnail('https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Info.png')
      .setFooter('This is pre-release software, this might be unstable at times. Please refer to github.com/stationaryStation/StationBot/issues to report any bug.')

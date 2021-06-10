@@ -7,6 +7,7 @@ module.exports = {
     args: true,
     usage: '<searchTerm>',
     cooldown: 5,
+    wip: false,
     async execute(message, args) {
         if (!args.length) {
 			return message.channel.send('You need to supply a search term!');

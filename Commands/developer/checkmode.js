@@ -4,6 +4,7 @@ module.exports = {
     description: 'Checks the current bot mode',
     args: false,
     cooldown: 2,
+    wip: false,
     execute(message) {
         if (stable == true) { // if unstable mode is true then say on the channel that unstable mode is on
             message.channel.send("Running on stable mode.");

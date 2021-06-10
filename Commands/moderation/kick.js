@@ -4,6 +4,7 @@ module.exports = {
     args: true,
     usage: '<user>',
     cooldown: 10,
+    wip: false,
     execute(message) {
         const user = message.mentions.users.first();
         if (user) {

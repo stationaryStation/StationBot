@@ -3,8 +3,10 @@ module.exports = {
     name: 'math',
     args: true,
     usage: '<operation> <num1> <num2>',
+    cooldown: 5,
+    wip: false,
     // eslint-disable-next-line no-unused-vars
-    execute(message, args, botVer, prefix){
+    execute(message, args, botVer){
          // Add variables for operations
          let op = args[0]
          let num1 = args[1]

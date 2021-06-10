@@ -6,8 +6,10 @@ module.exports = {
     args: true,
     usage: '<searchTerm>',
     description: 'Searches a gif in tenor.com',
+    cooldown: 5,
+    wip: false,
     // eslint-disable-next-line no-unused-vars
-    async execute(message, args, botVer, prefix){
+    async execute(message, args, botVer){
         const searchTerm = args.join(' ')
         // searchTerm is a argument which means that the syntax is st!tenor <searchTerm>
         if (!searchTerm){

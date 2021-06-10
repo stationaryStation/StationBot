@@ -5,6 +5,7 @@ module.exports ={
     args: true,
     usage: '<user> <reason>',
     cooldown: 10,
+    wip: false,
     execute(message, prefix) {
         const user = message.mentions.users.first()
         const warnReason = message.content.replace(`${prefix}warn`, '').split(' ').pop().trim();
