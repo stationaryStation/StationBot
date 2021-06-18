@@ -15,6 +15,7 @@ const isPreRelease = config.PreRelease
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
 const commandFolders = fs.readdirSync('./Commands');
+// const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'))
 
 // Search for commands on the commands folder (aka ./Commands/)
 for (const folder of commandFolders) {
@@ -25,15 +26,14 @@ for (const folder of commandFolders) {
 	}
 }
 // Add the event files (if they exist)
-const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'))
-for (const file of eventFiles) {
-	const event = require(`./events/${file}`);
-	if (event.once) {
-		client.once(event.name, (...args) => event.execute(...args, client, prefix, botVer, stable, branchNext));
-	} else {
-		client.on(event.name, (...args) => event.execute(...args, client, prefix, botVer, stable, branchNext));
-	}
-}
+// for (const file of eventFiles) {
+// 	const event = require(`./events/${file}`);
+// 	if (event.once) {
+// 		client.once(event.name, (...args) => event.execute(...args, client, prefix, botVer, stable, branchNext));
+// 	} else {
+// 		client.on(event.name, (...args) => event.execute(...args, client, prefix, botVer, stable, branchNext));
+// 	}
+// }
 // Set the prefix to the prefix you edited on config.json
 
 
