@@ -6,4 +6,10 @@ package.json
 .yarnrc
 .yarn
 .github
+yarn.lock
+.replit
 .vscode
+Discord Tokens.json
+token.json
+*.json
+.vs

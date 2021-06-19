@@ -1,283 +1,117 @@
+// Add variables for libraries
 const Discord = require('discord.js');
 const config = require('./config.json');
+const fs = require('fs');
+
+// Required variables
+const botVer = config.botVer;
 const client = new Discord.Client();
 const prefix = config.prefix
-// When the bot is ready, the presence is set to the help command.
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}.\n Ver: ${config.botVer}\n Prefix: ${prefix}`);
-  console.log('Bot ready for operation.');
-  if (config.stable == true){
-    client.user.setActivity(`${prefix}help for command list. | Using Current Branch`, {
-        type: 'LISTENING'
-     });
-  } else if (config.stable == false) {
-    client.user.setActivity(`${prefix}help for command list. | Using Unstable Branch`, {
-        type: 'LISTENING'
-     });
-  } else {
-      // This is just in case of the bot breaking.
-      console.error("An unexpected error has ocurred. Please report the issue to https://github.com/stationaryStation/stationBot/issues");
-  }
-  
-});
+// Misc variables (Some commands just won't work if this stop existing)
+const isStable = config.stable
+const isBranchNext = config.branchNext
+const isPreRelease = config.PreRelease
+// Create cooldowns + commands.
+client.commands = new Discord.Collection();
+client.cooldowns = new Discord.Collection();
+const commandFolders = fs.readdirSync('./Commands');
+// const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'))
+
+// Search for commands on the commands folder (aka ./Commands/)
+for (const folder of commandFolders) {
+	const commandFiles = fs.readdirSync(`./Commands/${folder}`).filter(file => file.endsWith('.js'));
+	for (const file of commandFiles) {
+		const command = require(`./Commands/${folder}/${file}`);
+		client.commands.set(command.name, command);
+	}
+}
+// Add the event files (if they exist)
+// for (const file of eventFiles) {
+// 	const event = require(`./events/${file}`);
+// 	if (event.once) {
+// 		client.once(event.name, (...args) => event.execute(...args, client, prefix, botVer, stable, branchNext));
+// 	} else {
+// 		client.on(event.name, (...args) => event.execute(...args, client, prefix, botVer, stable, branchNext));
+// 	}
+// }
+// Set the prefix to the prefix you edited on config.json
+client.on('ready', Ready => {
+	console.log(`Logged in as ${client.user.tag}.\n Ver: ${botVer}\n Prefix: ${prefix}`);
+	console.log('Bot ready for operation.');
+	if (config.stable == true){
+		client.user.setActivity(`${prefix}help for command list. | Using Current Branch`, {
+				type: 'LISTENING'
+		 });
+	} else if (isStable == false) {
+		client.user.setActivity(`${prefix}help for command list. | Using Unstable Branch`, {
+				type: 'LISTENING'
+		 });
+	}else if (isBranchNext == true){
+		client.user.setActivity(`${prefix}help for command list. | Using Next Branch`, {
+				type: 'LISTENING'
+		 });
+	}else if (isPreRelease == true){
+		client.user.setActivity(`${prefix}help for command list. | Pre-Release`, {
+				type: 'LISTENING'
+		 });
+	} else {
+			// This is just in case of the bot breaking.
+			console.error("An unexpected error has ocurred. Please report the issue to https://github.com/stationaryStation/stationBot/issues");
+
+			// And then after trowing the error, close StationBot.
+			process.exit();
+		}
+})
+
 // When a message is sended in a guild(Server), it will be logged on the console/output
-client.on('message', message => {
-  console.log(`${message.author.tag} at ${message.guild.name} said: ${message.content}\n`);
+client.on("message", async message => {
+    console.log(`${message.author.tag} at ${message.guild} said: ${message.content}\n`);
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+	const args = message.content.slice(prefix.length).trim().split(/ +/);
+	const command = args.shift().toLowerCase();
+/*
+cooldowns are set with:
+	module.exports = {
+	//..
+	cooldown: <cooldown time (in seconds)>,
+	//..
+}
+on the command file.
+*/
+	if (!client.commands.has(command)) return;
+  const { cooldowns } = client;
+
+if (!cooldowns.has(command.name)) {
+	cooldowns.set(command.name, new Discord.Collection());
+}
+
+const now = Date.now();
+const timestamps = cooldowns.get(command.name);
+const cooldownAmount = (command.cooldown || 3) * 1000;
+
+if (timestamps.has(message.author.id)) {
+  if (timestamps.has(message.author.id)) {
+    const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
+
+    if (now < expirationTime) {
+      const timeLeft = (expirationTime - now) / 1000;
+      return message.reply(`please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`);
+    }
+  }
+timestamps.set(message.author.id, now);
+setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+}
+
+	try {
+    // If the command exists, run it with the following variables (if required)
+		client.commands.get(command).execute(message, args, botVer, prefix, client);
+	} catch (error) {
+    // else if the command returns an error, notify the user.
+		console.error(error);
+		message.reply('There was an error trying to execute that command!');
+    message.channel.send(`\`\`\` ${error} \`\`\``)
+	}
 });
-client.on("message", function (message) {
-    if (message.author.bot) return;
-    if (!message.content.startsWith(prefix)) return; // This pesky return; was missing
-
-    const commandBody = message.content.slice(prefix.length);
-    const args = commandBody.split(' ');
-    const command = args.shift().toLowerCase();
-    // lists bot info
-    if (command === "botinfo") {
-        const timeTaken = Date.now() - message.createdTimestamp;
-        message.channel.send(`StationBot by stationaryStation\nVersion: ${config.botVer}\nCurrent Branch: Stable(github)\nPing: ${timeTaken}ms\nHosted with: node.js, discord.js and repl.it\nPrefixes: ${prefix}`)
-    }
-    // Lists server info
-    if (command === "serverinfo") {
-        message.channel.send(`Server name: ${message.guild.name}\n Total Members: ${message.guild.memberCount}\n`)
-    }
-    // test if the bot works
-    if (command === "test") {
-        message.reply('Hello World!');
-    }
-    // Ping Command
-    if (command === "ping") {
-        const timeTaken = Date.now() - message.createdTimestamp;
-        message.reply(`Pong! This message had a latency of ${timeTaken}ms.`);
-    }
-    // Kick Command
-    if (command === "kick") {
-        const user = message.mentions.users.first();
-        if (user) {
-            const member = message.guild.member(user);
-            if (member) {
-                member.kick('Someone was kicked using st!kick').then(() => {
-                    message.reply(`Successfully kicked ${user.tag} `)
-                }).catch(err => {
-                    message.reply(`Failed to kick ${user.tag}. Do i got the necessary permissions?`);
-                    console.error(err);
-                });
-            } else {
-                message.reply("That user isn't in this server!");
-            }
-        } else {
-            message.reply("You didn't mention the user to kick!")
-        }
-    }
-    // ban command
-    if (command === "ban") {
-        const user = message.mentions.users.first();
-            if (user) {
-                const member = message.guild.member(user);
-                if (member) {
-                    member.ban('Someone was banned using st!ban').then(() => {
-                        message.reply(`Successfully ban ${user.tag} `)
-                    }).catch(err => {
-                        message.reply(`Failed to ban ${user.tag}. Do i got the necessary permissions?`);
-                        console.error(err);
-                    });
-                } else {
-                    message.reply("That user isn't in this guild!");
-                }
-            } else {
-                message.reply("You didn't mention the user to ban!");
-            }
-        } 
-
-    // Help Command
-    if (command === "help") {
-        const cmd = message.content.replace(`${prefix}help`,'').split(' ').pop().trim();
-        if (cmd === "kick" ) {
-            message.channel.send(`${prefix}kick <username>\nUsage: Kicks the user that you mentioned. `);
-        } else if (cmd ==="ping" ) {
-            message.channel.send(`${prefix}ping\nUsage: The bot replies to you with your current ping.`);
-        } else if (cmd === "shutdown") {
-            message.channel.send(`${prefix}shutdown\nUsage: Shutdowns the bot.\n Requirements: Be the dev`);
-        } else if (cmd === "restart") {
-            message.channel.send(`${prefix}restart\nUsage: Restarts the bot`);
-        } else if (cmd === "help") {
-            message.channel.send(`${prefix}help <command>\nUsage: Lists all current commands`);
-        } else if (cmd === "ban") {
-            message.channel.send(`${prefix}ban <UserID/User>\nUsage: Bans the user mentioned permanently\nRequirements: Be an admin`);
-        } else if (cmd === "pootisfy" && config.stable == false) {
-            message.channel.send(`${prefix}pootisfy\n Usage: Changes your nickname to pootis\nRequirements: You need to not have the manage nicknames permission and the change nickname permission`);
-        } else if (cmd === "changeusernick") {
-            message.channel.send(`${prefix}changeusernick <user> <nick>\nUsage: Changes the nickname of the user mentioned to whatever you like`);
-        } else if (cmd === "changenick") {
-            message.channel.send(`${prefix}changenick <nick>\nUsage: Changes your nickname to whatever you like\nRequirements: You need to not have nor the manage nicknames permission and the change nickname permission `);
-        } else if (cmd === "boop"){
-            message.channel.send(`${prefix}boop <user>\n Usage: Boops the mentioned user`);
-        } else if (cmd === "devmedia") {
-            message.channel.send(`${prefix}devmedia\nUsage: Lists stationaryStation's social media`);
-        } else if (cmd === "" && config.stable == false) {
-            message.channel.send(`Commands:\ndevmedia\nboop\nchangenick\nchangeusernick\npootisfy\nban\nhelp\nrestart\nshutdown\nping\nkick`);
-        } else if (cmd === "" && config.stable == true) {
-            message.channel.send(`Commands:\ndevmedia\nboop\nchangenick\nchangeusernick\nban\nhelp\nrestart\nshutdown\nping\nkick`);
-        } else if (cmd === "math") {
-            message.channel.send(`${prefix}math\nInfo: Calculate simple operations\nUsage: \`\`\`${prefix}math <op> <num1> <num2>\`\`\`\nArguments:\n Op: add, sub, div, multi, pow, root\n Num1: Insert a number\n Num2: Insert A number `)
-        }
-       
-    }
-    // Shutdown command, Dev only
-    if (command === "shutdown") {
-        if (message.author.id === config.devID) {
-            message.channel.send('Goodbye...').then(sentMessage => {
-                sentMessage.react(':white_check_mark:')
-                // eslint-disable-next-line no-undef
-                process.exit();
-            });
-        } else {
-            message.reply("HEY! You can't just shutdown myself! You need the author's permission!");
-        }
-
-    }
-    // Restart command, unstable mode only
-    if (command === "restart" && config.stable == false) {
-        // eslint-disable-next-line no-undef
-        process.exit();
-    }
-    // Nickname changer command, User mention.
-    if (command === "changeusernick") {
-        const memberToEdit = message.mentions.members.first();
-        const newNickname = message.content.replace(`${prefix}changeusernick`, '').split(' ').pop().trim();
-        memberToEdit.setNickname(newNickname);''
-
-    }
-    // Change your own nickname.
-    if (command === "changenick") {
-        const newNick = message.content.replace(`${prefix}changenick`, '').split(' ').pop().trim();
-        message.member.setNickname(newNick);
-    }
-    // Lists Developer commands
-    if (command === "devcommands") {
-        message.channel.send(`Current Dev Commands:\n shutdown: Shutdowns the bot. If node.js mode is enabled, the bot will shutdown.\n st!restart: Restarts the bot, if you are the owner.\n st!checkmode: Lists the `);
-    }
-    // Lists The original developer's social media
-    if (command === "devmedia") {
-        message.channel.send(`Dev's twitter:\n https://twitter.com/dumplingfurry/\n Dev's StackOverflow:\n https://stackoverflow.com/users/15887961/stationarystation?tab=profile\n Dev's Github: https://github.com/stationaryStation `);
-    }
-    // Pootisfy Command
-    if (command === "pootisfy") {
-      const nick = 'pootis' // add nick as pootis
-      message.member.setNickname(nick); // change the message author's nick to pootis
-    }
-    // Reset Nickname command, unstable mode only
-    if (command === "resetnick"&& config.stable == false) { // Check if stable mode is false then run
-        const nick = message.author.tag();
-        message.member.setNickname(nick);
-        
-    }
-    // Pings a selected user.
-    if (command === "boop") {
-        const userToPing = message.mentions.members.first()
-        if (userToPing){
-            message.channel.send(`${userToPing}, Boop! ;p`);
-        } else {
-            message.reply(`I can't boop the void! >:(\n So please mention a user goddamit. `);
-        }
-    }
-    // Issue command, unstable mode only
-    if (command === "issue"&& config.stable == false) { // check if stable mode is false then run
-        message.channel.send('https://github.com/stationaryStation/stationBot/issues');
-        message.channel.send('Post your issues here. Also, here you can look at the code :depressed:');
-    }
-    // sends the github repo to your current channel
-    if (command === "github") {
-        message.channel.send('https://github.com/stationaryStation/stationBot/');
-    }
-    // Checks the current mode the bot is running.
-    if (command === "checkmode") {
-        if (config.stable == true) { // if unstable mode is true then say on the channel that unstable mode is on
-            message.channel.send("Running on stable mode.");
-        } else if (config.stable == false){ // if stable mode is true then say on the channel that stable mode is on
-            message.channel.send("Running on unstable mode.");
-        } else {
-            message.channel.send("An unexpected error has occurred. Please report it with st!issue");
-        }
-    }
-    // Math command
-    if (command === 'math'){
-        let op = args[0]
-        let num1 = args[1]
-        let num2 = args[2]
-
-        let parseNum1 = parseInt(num1)
-        let parseNum2 = parseInt(num2)
-
-        let ans
-
-        if (!op) {
-            message.channel.send("You need to specify the operation and the operands.");
-        } else {
-            if (op === "add"){
-                if(!args[1] || !args[2]) {
-                    message.channel.send("You need to specify the operands.");
-                } else {
-                    ans = parseNum1 + parseNum2
-                    message.channel.send(`Your answer is: ${ans}`)
-                }
-
-            } else if(op === "sub"){
-                if(!args[1] || !args[2]) {
-                    message.channel.send("You need to specify the operands.");
-                } else{
-                    ans = parseNum1 - parseNum2
-                    message.channel.send(`Your answer is: ${ans}`)
-                }
-
-            } else if(op === "multi"){
-                if(!args[1] || !args[2]) {
-                    message.channel.send("You need to specify the operands.");
-                } else {
-                    ans = parseNum1 * parseNum2
-                    message.channel.send(`Your answer is: ${ans}`)
-                }
-
-            } else if(op === "div"){
-                if(!args[1] || !args[2]) {
-                    message.channel.send("You need to specify the operands.");
-                } else {
-                    ans = parseNum1 / parseNum2
-                    message.channel.send(`Your answer is: ${ans}`)
-                }
-
-            }else if(op === "mod"){
-                if(!args[1] || !args[2]) {
-                    message.channel.send("You need to specify the operands.");
-                } else {
-                    ans = parseNum1 % parseNum2
-                    message.channel.send(`Your answer is: ${ans}`)
-                }
-
-            }else if(op === "pow"){
-                if(!args[1] || !args[2]) {
-                    message.channel.send("You need to specify the operands.");
-                } else {
-                    ans = Math.pow(parseNum1, parseNum2);
-                    message.channel.send(`Your answer is: ${ans}`)
-                }
-
-            }else if(op === "root"){
-                if(!args[1] || !args[2]) {
-                    message.channel.send("You need to specify the operands.");
-                }else {
-                    ans = Math.pow(parseNum1, 1/parseNum2);
-                    message.channel.send(`Your answer is: ${ans}`)
-                }
-
-            }
-        }
-
-    }
-    
-
-}); 
 // After that, login to the bot account.
 client.login(config.BOT_TOKEN);
-// Change bot's avatar and Username from config.json WIP
-// client.user.setAvatar('https://raw.githubusercontent.com/stationaryStation/StationBot/master/ProfilePictures/V2%20(Account).png');
-// client.user.setUsername(config.botUsername)
