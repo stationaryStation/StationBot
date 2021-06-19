@@ -6,16 +6,12 @@ module.exports = {
   cooldown: 10,
   wip: true,
   execute(message, args) {
-    const name = args[0]
-    function roll(rollName) {
-      const result = Math.random() * 100 + 1;
-      return result; //Send the result
-    }
-    if(!name) {
-      roll();
+    const rollName = args[0]
+    if(!rollName) {
+      const result = Math.random() * (100 - 1) + 1;
       message.channel.send(`You rolled: ${result}`);
     } else {
-      roll(name); //Rolls the dice
+      const result = Math.random() * 100 + 1;
       message.channel.send(`***${rollName}%***\n You rolled: ${result} `); //Sends the results
     }
 

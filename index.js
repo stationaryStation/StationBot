@@ -35,7 +35,33 @@ for (const folder of commandFolders) {
 // 	}
 // }
 // Set the prefix to the prefix you edited on config.json
+client.on('ready', Ready => {
+	console.log(`Logged in as ${client.user.tag}.\n Ver: ${botVer}\n Prefix: ${prefix}`);
+	console.log('Bot ready for operation.');
+	if (config.stable == true){
+		client.user.setActivity(`${prefix}help for command list. | Using Current Branch`, {
+				type: 'LISTENING'
+		 });
+	} else if (isStable == false) {
+		client.user.setActivity(`${prefix}help for command list. | Using Unstable Branch`, {
+				type: 'LISTENING'
+		 });
+	}else if (isBranchNext == true){
+		client.user.setActivity(`${prefix}help for command list. | Using Next Branch`, {
+				type: 'LISTENING'
+		 });
+	}else if (isPreRelease == true){
+		client.user.setActivity(`${prefix}help for command list. | Pre-Release`, {
+				type: 'LISTENING'
+		 });
+	} else {
+			// This is just in case of the bot breaking.
+			console.error("An unexpected error has ocurred. Please report the issue to https://github.com/stationaryStation/stationBot/issues");
 
+			// And then after trowing the error, close StationBot.
+			process.exit();
+		}
+})
 
 // When a message is sended in a guild(Server), it will be logged on the console/output
 client.on("message", async message => {
