@@ -22,6 +22,13 @@ for (const folder of commandFolders) {
     }
 }
 
+client.on('guildMemberAdd', member => {
+  const channel = member.guild.channels.cache.find(ch => ch.find === 'welcome-channel');
+  //If the channel name isn't found then do nothing
+  if (!channel) return;
+  channel.send(`Welcome to our server, ${member}!\n We hope you have a nice day!`)
+})
+
 client.on('ready', Ready => {
     console.log(`Logged in as ${client.user.tag}.\nVersion: ${bot_version}\nPrefix: ${prefix}`);
     console.log(`Bot is ready to recieve commands!`)
@@ -30,18 +37,18 @@ client.on('ready', Ready => {
         type: 'LISTENING'
       });
     }else if (bot_stable == false) {
-      client.user.setActivity(`${prefix}help for command list! | Using Unstable mode` {
+      client.user.setActivity(`${prefix}help for command list! | Using Unstable mode`, {
         type: 'LISTENING'
       });
     }else if (bot_stable == null) {
       console.log('No stable mode detected. Quitting...')
       process.exit();
     }
-}
+});
 
 client.on("message", async message => {
   function logMessages() {
-    console.log(`${message.author.tag} at ${message.guild} said: ${message.content}`)
+    console.log(`${message.author.tag} at ${message.guild} said: ${message.content}`) //Log all messages on the console via this function 
   }
 
   logMessages();
@@ -64,4 +71,7 @@ client.on("message", async message => {
   } catch(error) {
     message.channel.send(`Invalid or missing command called \`\`\`${commandName}\`\`\``)
   }
-})
+});
+
+client.login(bot_token);
+
