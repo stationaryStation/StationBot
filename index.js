@@ -1,0 +1,67 @@
+const Discord = require('discord.js')
+const fs = require('fs')
+const {token, botVer, stable, nextBranch, prerelease} = require('./config.json')
+// libs above
+const client = new Discord.client()
+const bot_token = token;
+const bot_version = botVer;
+const bot_stable = stable;
+const bot_prefix = prefix;
+// required stuff for bot above.
+
+// Create commands and cooldowns
+client.commands = new Discord.Collection();
+client.cooldowns = new Discord.Collection();
+const commandFolders = fs.readdirSync('./Commands');
+
+for (const folder of commandFolders) {
+    const commandFiles = fs.readdirSync(`./Commands/${folder}`).filter(file => file.endsWith('.js'));
+    for (const file of commandFiles) {
+        const command = require(`./Commands/${folder}/${file}`);
+        client.commands.set(command.name, command);
+    }
+}
+
+client.on('ready', Ready => {
+    console.log(`Logged in as ${client.user.tag}.\nVersion: ${bot_version}\nPrefix: ${prefix}`);
+    console.log(`Bot is ready to recieve commands!`)
+    if (bot_stable == true) {
+      client.user.setActivity(`${prefix}help for command list!`, {
+        type: 'LISTENING'
+      });
+    }else if (bot_stable == false) {
+      client.user.setActivity(`${prefix}help for command list! | Using Unstable mode` {
+        type: 'LISTENING'
+      });
+    }else if (bot_stable == null) {
+      console.log('No stable mode detected. Quitting...')
+      process.exit();
+    }
+}
+
+client.on("message", async message => {
+  function logMessages() {
+    console.log(`${message.author.tag} at ${message.guild} said: ${message.content}`)
+  }
+
+  logMessages();
+
+  if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+  const args = message.content.slice(prefix.length).trim().split(/ +/);
+  const commandName = args.shift().toLowerCase();
+
+  if (!client.commands.has(commandName)) return;
+
+  const command = client.commands.get(commandName);
+
+  if(command.args && !args.length){
+    return message.channel.send(`You didn't provide any arguments, ${message.author}`)
+  }
+
+  try {
+    command.execute(message, args);
+  } catch(error) {
+    message.channel.send(`Invalid or missing command called \`\`\`${commandName}\`\`\``)
+  }
+})
