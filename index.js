@@ -1,8 +1,8 @@
 const Discord = require('discord.js')
 const fs = require('fs')
-const {token, botVer, stable, nextBranch, prerelease} = require('./config.json')
+const {token, botVer, stable, nextBranch, prerelease, prefix} = require('./config.json')
 // libs above
-const client = new Discord.client()
+const client = new Discord.Client()
 const bot_token = token;
 const bot_version = botVer;
 const bot_stable = stable;
@@ -48,28 +48,35 @@ client.on('ready', Ready => {
 
 client.on("message", async message => {
   function logMessages() {
-    console.log(`${message.author.tag} at ${message.guild} said: ${message.content}`) //Log all messages on the console via this function 
+    console.log(`${message.author.tag} at ${message.guild} said: ${message.content}`) //Log all messages on the console via this function
   }
 
   logMessages();
 
-  if (!message.content.startsWith(prefix) || message.author.bot) return;
+  if (!message.content.startsWith(bot_prefix) || message.author.bot) return;
 
   const args = message.content.slice(prefix.length).trim().split(/ +/);
   const commandName = args.shift().toLowerCase();
 
   if (!client.commands.has(commandName)) return;
 
-  const command = client.commands.get(commandName);
+  const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases.includes(commandName));
+  
+  if (!command) return;
+
+  if (command.guildOnly && message.channel.type == "dm") {
+    return message.channel.send (`Sorry, it seems that \`\`\`${command.name}\`\`\` is only available on servers and not in DMs.`)
+  }
 
   if(command.args && !args.length){
     return message.channel.send(`You didn't provide any arguments, ${message.author}`)
   }
 
   try {
-    command.execute(message, args);
+    command.execute(message, args, bot_version, bot_stable, bot_prefix);
   } catch(error) {
-    message.channel.send(`Invalid or missing command called \`\`\`${commandName}\`\`\``)
+    message.channel.send(`Invalid or missing command called \`\`\`${commandName}\`\`\``);
+    message.channel.send(`\`\`\`${error}\`\`\``)
   }
 });
 
