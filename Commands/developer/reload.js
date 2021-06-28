@@ -7,14 +7,14 @@ module.exports = {
   usage: '<command>',
   execute(message, args) {
     const commandName = args[0].toLowerCase();
-    const command = message.client.commands.get(commandName) || message.client.commmands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+    const command = message.client.commands.get(commandName) || message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
     if (!command) {
       return message.channel.send(`There isn't a command or alias with \`\`\` ${commandName}\`\`\`, ${message.author}!`);
     }
 
-    const commandFolders = fs.readdirSync(`./Commands/`);
-    const folderName =  commandFolders.find(folder => fs.readdirSync(`./Commands/${folder}`).includes(`${commandName}`));
+    const commandFolders = fs.readdirSync(`../../Commands/`);
+    const folderName =  commandFolders.find(folder => fs.readdirSync(`./Commands/${folder}`).includes(`${commandName}.js `));
 
     delete require.cache[require.resolve(`../${folderName}/${command.name}.js`)];
 
