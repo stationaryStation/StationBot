@@ -2,6 +2,7 @@ const {branchNext, stable} = require('../../config.json')
 module.exports = {
     name: 'checkmode',
     description: 'Checks the current bot mode',
+    aliases: ['chm', 'mode'],
     args: false,
     cooldown: '2',
     execute(message) {

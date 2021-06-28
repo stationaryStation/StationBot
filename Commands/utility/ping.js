@@ -1,6 +1,6 @@
-const Discord = require('Discord.js')
+const Discord = require('discord.js')
 module.exports = {
-    name: 'Ping',
+    name: 'ping',
     description: 'Tells the User his ping with an embed',
     // eslint-disable-next-line no-unused-vars
     execute(message, args, botVer, prefix){

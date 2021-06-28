@@ -2,6 +2,7 @@ const fs = require('fs');
 module.exports = {
   name: "reload",
   description: "Reloads the specified command.",
+  aliases: ["reload", "rl", "update"],
   args: true,
   wip: true, 
   usage: '<command>',
@@ -13,7 +14,7 @@ module.exports = {
       return message.channel.send(`There isn't a command or alias with \`\`\` ${commandName}\`\`\`, ${message.author}!`);
     }
 
-    const commandFolders = fs.readdirSync(`../../Commands/`);
+    const commandFolders = fs.readdirSync(`./Commands/`);
     const folderName =  commandFolders.find(folder => fs.readdirSync(`./Commands/${folder}`).includes(`${commandName}.js `));
 
     delete require.cache[require.resolve(`../${folderName}/${command.name}.js`)];

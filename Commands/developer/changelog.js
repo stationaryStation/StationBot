@@ -1,9 +1,11 @@
 const Discord = require('discord.js')
 module.exports = {
     name: 'changelog',
+    description: 'lists the changelog for stationaryStation\'s StationBot',
+    aliases: ['chl', "changes", "syschanges"],
     args: false,
     // eslint-disable-next-line no-unused-vars
-    execute(message, args, prefix, botVer){
+    execute(message, args, bot_prefix, bot_version){
         const changelog = new Discord.MessageEmbed()
         .setColor('#FF0057')
         .setTitle(`Changelog`)

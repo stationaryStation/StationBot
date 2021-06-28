@@ -1,6 +1,7 @@
 module.exports = {
     name: 'devcommands',
     args: false,
+    aliases: ['dcmds', 'devtools'],
     description: 'Displays the available developer commands',
     // eslint-disable-next-line no-unused-vars
     execute(message, args){
