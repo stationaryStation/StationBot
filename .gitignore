@@ -1,4 +1,4 @@
-node_modules
+./node_modules/
 .env
 config.json
 package-lock.json
@@ -7,6 +7,4 @@ package.json
 .yarn
 .github
 .vscode
-Discord Tokens.json
-token.json
-*.json
+./config/config.json
