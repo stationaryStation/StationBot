@@ -5,7 +5,9 @@ module.exports = {
 	args: false,
 	wip: true,
 	execute(message) {
-		const joinedMembers = message.guild.members.fetch().toArray()
-		message.channel.send(`joined users: ${joinedMembers}`);
+		const list = message.guild.members.cache.array();
+		const members = list.toString().split();
+		console.log(`${members}`)
+		message.channel.send(`Online users in this guild:\n${list}`)
 	}
 }
