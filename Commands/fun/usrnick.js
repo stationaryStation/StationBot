@@ -15,13 +15,13 @@ module.exports = {
         }else if (mode === "show" && !user) {
             message.channel.send(`Your nickname:\n ${message.user.nickname}`);
         }else if (mode === "change") {
-            if(!memberToEdit) {
+            if(!user) {
                 message.channel.send('You need to specify an actual user (that exists and is here with you)')
             } else if (!newNickname) {
                 message.channel.send('Where is the nickname? Because I don\'t see one.')
             } else {
                 try {
-                memberToEdit.setNickname(newNickname)
+                user.setNickname(newNickname)
                 }catch(error){
                     message.channel.send(`\`\`\`${error}\`\`\``)
                 }   
