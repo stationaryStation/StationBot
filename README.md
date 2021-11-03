@@ -1,6 +1,7 @@
-# **WARNING!**
+**WARNING!**
 **This bot is OUTDATED (2.1c => 3.0a)**
-
+The bot will be updated just for small new features and stability inprovements.
+----
 [***StationBot 3.0alpha***](https://gitlab.com/stationarystation/stationbot) has been released. Please clone this repository in order to use the legacy `2.1c/2.1n` versions.
 
 [***How to migrate guide***](https://bot.perezbueno.xyz/migrate)
