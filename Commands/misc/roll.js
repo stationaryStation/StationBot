@@ -8,10 +8,10 @@ module.exports = {
   execute(message, args) {
     const rollName = args[0]
     if(!rollName) {
-      const result = Math.random() * (100 - 1) + 1;
+      const result = Math.floor((Math.random() * 100) + 1);
       message.channel.send(`You rolled: ${result}`);
     } else {
-      const result = Math.random() * 100 + 1;
+      const result = Math.floor((Math.random() * 100) + 1);
       message.channel.send(`***${rollName}%***\n You rolled: ${result} `); //Sends the results
     }
 
