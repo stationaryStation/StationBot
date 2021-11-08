@@ -1,15 +1,12 @@
-node_modules
+node_modules/
 .env
 config.json
 package-lock.json
-package.json
 .yarnrc
 .yarn
+GithubWikiGifs
 .github
 yarn.lock
 .replit
 .vscode
-Discord Tokens.json
-token.json
-*.json
 .vs
