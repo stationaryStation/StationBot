@@ -1,11 +1,10 @@
 module.exports = {
     name: 'issue',
-    description: 'Sends a link to the StationBot Issue page',
+    description: 'Sends a link to the StationBot v2 Issue page',
     cooldown: 5,
     args: false,
     wip: false,
     execute(message){
-        message.channel.send('https://github.com/stationaryStation/stationBot/issues');
-        message.channel.send('Post your issues here. Also, here you can look at the code');
+        message.channel.send('Report a bug or issue here: https://github.com/stationaryStation/stationBot/issues');
     }
 }
