@@ -4,6 +4,7 @@ module.exports = {
 	args: true,
 	usage: '<string>',
 	execute(message) {
+		message.delete()
 		let sentence = message.content.split(" ");
     		sentence.shift();
 		sentence = sentence.join(" ");
