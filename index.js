@@ -1,5 +1,5 @@
 // Add variables for libraries
-const Discord = require('discord.js');
+const Discord = require('discord.js-12');
 const config = require('./config.json');
 const fs = require('fs');
 
