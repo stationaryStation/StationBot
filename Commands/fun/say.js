@@ -6,9 +6,8 @@ module.exports = {
 	execute(message) {
 		message.delete()
 		let sentence = message.content.split(" ");
-    		sentence.shift();
+		sentence.shift();
 		sentence = sentence.join(" ");
 		message.channel.send(sentence);
-
 	}
 }

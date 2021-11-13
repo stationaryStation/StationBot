@@ -9,7 +9,7 @@ const client = new Discord.Client();
 const prefix = config.prefix
 // Misc variables (Some commands just won't work if this stop existing)
 const isStable = config.stable
-const isBranchNext = config.branchNext
+const BranchNext = config.branchNext
 const isPreRelease = config.PreRelease
 // Create cooldowns + commands.
 client.commands = new Discord.Collection();
@@ -41,19 +41,19 @@ client.on('ready', Ready => {
 	if (config.stable == true){
 		client.user.setActivity(`${prefix}help for command list. | Using Current Branch`, {
 				type: 'LISTENING'
-		 });
+		});
 	} else if (isStable == false) {
 		client.user.setActivity(`${prefix}help for command list. | Using Unstable Branch`, {
 				type: 'LISTENING'
-		 });
-	}else if (isBranchNext == true){
+		});
+	} else if (BranchNext == true){
 		client.user.setActivity(`${prefix}help for command list. | Using Next Branch`, {
 				type: 'LISTENING'
-		 });
+		});
 	}else if (isPreRelease == true){
 		client.user.setActivity(`${prefix}help for command list. | Pre-Release`, {
 				type: 'LISTENING'
-		 });
+		});
 	} else {
 			// This is just in case of the bot breaking.
 			console.error("An unexpected error has ocurred. Please report the issue to https://github.com/stationaryStation/stationBot/issues");
