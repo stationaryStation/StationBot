@@ -35,7 +35,7 @@ for (const folder of commandFolders) {
 // 	}
 // }
 // Set the prefix to the prefix you edited on config.json
-client.on('ready', Ready => {
+client.on('ready', () => {
 	console.log(`Logged in as ${client.user.tag}.\n Ver: ${botVer}\n Prefix: ${prefix}`);
 	console.log('Bot ready for operation.');
 	if (config.stable == true){
