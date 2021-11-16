@@ -4,9 +4,11 @@ config.json
 package-lock.json
 .yarnrc
 .yarn
-GithubWikiGifs
+events/
+GithubWikiGifs/
 .github
 yarn.lock
 .replit
 .vscode
 .vs
+ProfilePictures/

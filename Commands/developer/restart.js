@@ -13,7 +13,7 @@ module.exports = {
                 process.exit();
             });
         } else {
-            message.reply("HEY! You can't just shutdown myself! You need the author's permission!");
+            message.reply("HEY! You can't just restart me! You need the author's permission!");
         }
     }
 }

@@ -7,7 +7,7 @@ module.exports = {
         try{
           message.member.setNickname(nick);// change the message author's nick to pootis
         }catch(error) {
-          message.channel.send(`\`\`\`${error}\`\`\``)
+          message.channel.send(`Error while changing nickname:\n\`\`\`${error}\`\`\``)
         } 
     }
 }

@@ -9,12 +9,16 @@
   "author": "stationaryStation",
   "license": "ISC",
   "dependencies": {
+    "@discordjs/opus": "^0.5.3",
+    "@discordjs/voice": "^0.7.5",
     "discord-math": "^1.0.5",
     "discord.js": "^12.5.3",
     "discord.js-12": "^1.0.2",
     "mathjs": "^9.4.1",
     "node-fetch": "^2.6.1",
-    "pm2": "^2.10.4"
+    "pm2": "^2.10.4",
+    "sodium": "^3.0.2",
+    "ytdl-core": "^4.9.1"
   },
   "devDependencies": {
     "eslint": "^7.26.0"
