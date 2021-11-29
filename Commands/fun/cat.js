@@ -6,6 +6,7 @@ module.exports = {
   cooldown: 5,
   wip: false,
   async execute (message) {
+    // Fetch a random image/gif from https://aws.random.cat/meow and send it to chat.
     const { file } = await fetch('https://aws.random.cat/meow').then(response => response.json())
     message.channel.send(file)
   }
