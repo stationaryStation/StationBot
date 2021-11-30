@@ -1,5 +1,6 @@
 {
     "cSpell.words": [
         "Boops"
-    ]
+    ],
+    "cmake.configureOnOpen": false
 }

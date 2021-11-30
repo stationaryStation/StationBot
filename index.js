@@ -3,6 +3,35 @@ const Discord = require('discord.js-12')
 const fs = require('fs')
 // Import Config
 const config = require('config.json')
+// Make Init function
+function init() {
+  console.log(`Logged in as ${client.user.tag}.\n Ver: ${botVer}\n Prefix: ${prefix}`)
+  console.log('Bot ready for operation.')
+  // Check if you are using the Stable version and change status accordingly
+  if (config.stable === true) {
+      client.user.setActivity(`${prefix}help for command list. | Using Current Branch`, {
+      type: 'LISTENING'
+    })
+  } else if (isStable === false) {
+      client.user.setActivity(`${prefix}help for command list. | Using Unstable Branch`, {
+      type: 'LISTENING'
+    })
+  } else if (BranchNext === true) {
+      client.user.setActivity(`${prefix}help for command list. | Using Next Branch`, {
+      type: 'LISTENING'
+    })
+  } else if (isPreRelease === true) {
+      client.user.setActivity(`${prefix}help for command list. | Pre-Release`, {
+        type: 'LISTENING'
+      })
+  } else {
+      // This is just in case of the bot breaking.
+      // Perhaps put the error message on a constant?
+      console.error('An unexpected error has ocurred. Please report the issue to https://github.com/stationaryStation/stationBot/issues')
+      // And then after trowing the error, close StationBot.
+      process.exit()
+  }
+}
 if (!config.Token) {
   console.log("No Token Detected.\nPlease add the token in config.json")
   process.exit()
@@ -13,7 +42,10 @@ if (!config.Token) {
 const botVer = config.botVer
 const client = new Discord.Client()
 const prefix = config.prefix
-// Misc variables (Some commands just won't work if this stop existing)
+/* 
+Misc variables (Some commands just won't work if this stop existing.)
+They already exist but aparently they don't work correctly if i have the config.* (* = anything)
+*/
 const isStable = config.stable
 const BranchNext = config.branchNext
 const isPreRelease = config.PreRelease
@@ -42,36 +74,11 @@ for (const folder of commandFolders) {
 // }
 // Set the prefix to the prefix you edited on config.json
 client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}.\n Ver: ${botVer}\n Prefix: ${prefix}`)
-  console.log('Bot ready for operation.')
-  // Check if you are using the Stable version and change status accordingly
-  if (config.stable === true) {
-    client.user.setActivity(`${prefix}help for command list. | Using Current Branch`, {
-      type: 'LISTENING'
-    })
-  } else if (isStable === false) {
-    client.user.setActivity(`${prefix}help for command list. | Using Unstable Branch`, {
-      type: 'LISTENING'
-    })
-  } else if (BranchNext === true) {
-    client.user.setActivity(`${prefix}help for command list. | Using Next Branch`, {
-      type: 'LISTENING'
-    })
-  } else if (isPreRelease === true) {
-    client.user.setActivity(`${prefix}help for command list. | Pre-Release`, {
-      type: 'LISTENING'
-    })
-  } else {
-    // This is just in case of the bot breaking.
-    // Perhaps put the error message on a constant?
-    console.error('An unexpected error has ocurred. Please report the issue to https://github.com/stationaryStation/stationBot/issues')
-    // And then after trowing the error, close StationBot.
-    process.exit()
-  }
-})
+    init()
+  })
 
 // When a message is sended in a guild(Server), it will be logged on the console/output
-client.on('message', async message => {
+ client.on('message', async message => {
   console.log(`${message.author.tag} at ${message.guild} said: ${message.content}\n`)
   if (!message.content.startsWith(prefix) || message.author.bot) return
 
