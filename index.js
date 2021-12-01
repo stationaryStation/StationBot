@@ -1,3 +1,10 @@
+/**
+ * 
+ * Name: StationBot
+ * Description: Bot for discord.
+ * Author: StationaryStation
+ * 
+ */
 // Add variables for libraries
 const Discord = require('discord.js-12')
 const fs = require('fs')
@@ -65,17 +72,19 @@ for (const folder of commandFolders) {
     client.commands.set(command.name, command)
   }
 }
-// Add the event files (if they exist) Not Used. Maybe fixing it in the future.
-// for (const file of eventFiles) {
-//   const event = require(`./events/${file}`);
-//   if (event.once) {
-//     client.once(event.name, (...args) => event.execute(...args, client, prefix, botVer, stable, branchNext));
-//   } else {
-//     client.on(event.name, (...args) => event.execute(...args, client, prefix, botVer, stable, branchNext));
-//   }
-// }
-// Set the prefix to the prefix you edited on config.json
-client.on('ready', () => {
+/* 
+Add the event files (if they exist) Not Used. Maybe fixing it in the future.
+ for (const file of eventFiles) {
+   const event = require(`./events/${file}`);
+   if (event.once) {
+     client.once(event.name, (...args) => event.execute(...args, client, prefix, botVer, stable, branchNext));
+   } else {
+     client.on(event.name, (...args) => event.execute(...args, client, prefix, botVer, stable, branchNext));
+   }
+ }
+Set the prefix to the prefix you edited on config.json
+*/
+ client.on('ready', () => {
     init()
   })
 
