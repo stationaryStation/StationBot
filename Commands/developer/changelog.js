@@ -11,13 +11,11 @@ module.exports = {
       .setColor('#FF0057')
       .setTitle('Changelog')
       .setAuthor(`stationBot ${botVer}`, 'https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png')
-      .setDescription('Pre-Release 1')
+      .setDescription('1.2.5 alpha')
       .addFields(
-        { name: 'Re-writen the whole framework', value: 'Now instead of the bot consisting on one file, now the commands are divided on multiple files!' },
-        { name: 'Bugs deleted', value: 'Since the rewrite, there was loads and loads of bugs, most of them fixed.' },
-        { name: 'A better place... for developers', value: 'This pre-release took a lot of time and effort to make. Now hopefully, you can\'t say that this code is a mess.' },
-        { name: 'Embeds, loads of them', value: 'Yay! Everyone\'s favorite way to send beautiful messages is now here!' },
-        { name: 'Added many commands', value: 'Commands each update are really important to me (and you), so I added 10 commands!' }
+        { name: 'More commands!', value: 'I havent updated StationBot in a while now, and I wanted to add more commands so I added a fun one! (st:say)' },
+        { name: 'Bugs deleted', value: 'I squatched a lot of bugs a long time ago and this update is no exeption.' },
+        { name: 'Comments! Loads of them!', value: 'Hopefully, development will be a lot easier since the documentation webpage is still on the works' },
       )
       .setThumbnail('https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Info.png')
     message.channel.send(changelog)
