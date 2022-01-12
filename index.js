@@ -9,7 +9,7 @@
 const Discord = require('discord.js-12')
 const fs = require('fs')
 // Import Config
-const config = require('config.json')
+const config = require('./config.json')
 
 // Make Init function
 const init = () => {
@@ -75,7 +75,7 @@ const isPreRelease = config.PreRelease
 client.commands = new Discord.Collection()
 client.cooldowns = new Discord.Collection()
 const commandFolders = fs.readdirSync('./Commands')
-// const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'))
+const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'))
 
 // Search for commands on the commands folder (aka ./Commands/)
 for (const folder of commandFolders) {
@@ -87,18 +87,17 @@ for (const folder of commandFolders) {
     client.commands.set(command.name, command)
   }
 }
-/*
-Add the event files (if they exist) Not Used. Maybe fixing it in the future.
- for (const file of eventFiles) {
-   const event = require(`./events/${file}`);
-   if (event.once) {
-     client.once(event.name, (...args) => event.execute(...args, client, prefix, botVer, stable, branchNext));
-   } else {
-     client.on(event.name, (...args) => event.execute(...args, client, prefix, botVer, stable, branchNext));
-   }
- }
-Set the prefix to the prefix you edited on config.json
-*/
+
+
+for (const file of eventFiles) {
+  const event = require(`./events/${file}`);
+  if (event.once) {
+    client.once(event.name, (...args) => event.execute(...args));
+  } else {
+    client.on(event.name, (...args) => event.execute(...args));
+  }
+}
+
 client.on('ready', () => {
   init()
 })
@@ -134,7 +133,7 @@ client.on('message', async message => {
   if (!cooldowns.has(command.name)) {
     cooldowns.set(command.name, new Discord.Collection())
   }
-
+  // cooldown system (Not working to this moment)
   const now = Date.now()
   const timestamps = cooldowns.get(command.name)
   const cooldownAmount = (command.cooldown || 3) * 1000
