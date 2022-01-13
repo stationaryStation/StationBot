@@ -4,7 +4,6 @@ config.json
 package-lock.json
 .yarnrc
 .yarn
-events/
 GithubWikiGifs/
 .github
 yarn.lock
