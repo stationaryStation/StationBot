@@ -15,7 +15,7 @@ module.exports = {
         .setAuthor(`stationBot ${botVer}`, 'https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png')
         .setDescription(`${userToPing}, you Have been booped! ;p`)
         .setThumbnail('https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Boop.png')
-      message.channel.send(BoopSuccessful)
+      message.channel.send({embed: BoopSuccessful})
     } else {
       const BoopFailed = new Discord.MessageEmbed()
         .setColor('#FF0057')
@@ -23,7 +23,7 @@ module.exports = {
         .setAuthor(`stationBot ${botVer}`, 'https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png')
         .setDescription('Please mention a user to ping/boop.')
         .setThumbnail('https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Boop.png')
-      message.channel.send(BoopFailed)
+      message.channel.send({embed: BoopFailed})
     }
   }
 }

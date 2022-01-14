@@ -104,12 +104,6 @@ client.on('ready', () => {
 
 // When a message is sended in a guild(Server), it will be logged on the console/output
 client.on('message', async message => {
-  // Log Every Single message from every single guild
-
-  console.log(
-    `${message.author.tag} at ${message.guild} said: ${message.content}\n`
-  )
-
   // Check if the command starts with the prefix
   if (!message.content.startsWith(prefix) || message.author.bot) return
   // If it does, add the command to a constant and declare arguments
@@ -138,7 +132,6 @@ client.on('message', async message => {
   const timestamps = cooldowns.get(command.name)
   const cooldownAmount = (command.cooldown || 3) * 1000
 
-  if (timestamps.has(message.author.id)) {
     if (timestamps.has(message.author.id)) {
       const expirationTime = timestamps.get(message.author.id) + cooldownAmount
 
@@ -147,13 +140,12 @@ client.on('message', async message => {
         return message.reply(
           `please wait ${timeLeft.toFixed(
             1
-          )} more second(s) before reusing the \`${command.name}\` command.`
+          )} more second(s) before using \`${prefix}${command}\`.`
         )
       }
     }
     timestamps.set(message.author.id, now)
     setTimeout(() => timestamps.delete(message.author.id), cooldownAmount)
-  }
 
   try {
     // If the command exists, run it with the following variables (if required)

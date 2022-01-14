@@ -1,4 +1,6 @@
+const config = require("../../config.json");
 const Discord = require('discord.js')
+
 module.exports = {
   name: 'botinfo',
   args: false,
@@ -17,13 +19,13 @@ module.exports = {
       .setDescription('StationBot by stationaryStation\nA bot for moderation made with the powerful discord.js engine.')
       .addFields(
         { name: 'Ping', value: `${timeTaken}` },
-        { name: 'Current Version', value: `${botVer}` },
-        { name: 'Github Branch', value: 'Pre-Release 2' },
-        { name: 'Prefix:', value: `${prefix}` }
+        { name: 'Current Version', value: `${config.botVer}` },
+        { name: 'Github Branch', value: 'Stable' },
+        { name: 'Prefix:', value: `${config.prefix}` }
       )
       .setThumbnail('https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Info.png')
       .setFooter('This is pre-release software, this might be unstable at times. Please refer to github.com/stationaryStation/StationBot/issues to report any bug.')
     // Then send the embed to the user's channel
-    message.channel.send(botInfoEmbed)
+    message.channel.send({embed: botInfoEmbed})
   }
 }

@@ -14,11 +14,8 @@ module.exports = {
       message.reply('You need to mention an user!')
     } else if (!warnReason) {
       message.reply('No reason for warning someone? Realy?')
-    } else {
-      const warnEmbed = new Discord.MessageEmbed()
-        .setDescription('The user has been warned')
-        .setColor('#FF0057')
-      message.channel.send(warnEmbed)
+    } else { 
+      message.channel.send("✅ The user has been warned")
       message.client.users.fetch(UserID).then((user) => {
         user.send(`You have been warned in ${message.guild} due the following reason:\n\`\`\`${warnReason}\`\`\` `)
       })

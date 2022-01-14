@@ -35,7 +35,7 @@ module.exports = {
             .setAuthor(`stationBot ${botVer}`, 'https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png')
             .setDescription(`Your Answer is: ${ans}`)
             .setThumbnail('https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Math%20-%20%20Plus.png')
-          message.channel.send(SumAnswer)
+          message.channel.send({embed: SumAnswer})
         }
       } else if (op === 'sub') {
         if (!args[1] || !args[2]) {
@@ -48,7 +48,7 @@ module.exports = {
             .setAuthor(`stationBot ${botVer}`, 'https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png')
             .setDescription(`Your Answer is: ${ans}`)
             .setThumbnail('https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Math%20-%20%20Minus.png')
-          message.channel.send(SubAnswer)
+          message.channel.send({embed: SubAnswer})
         }
       } else if (op === 'multi') {
         if (!args[1] || !args[2]) {
@@ -61,7 +61,7 @@ module.exports = {
             .setAuthor(`stationBot ${botVer}`, 'https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png')
             .setDescription(`Your Answer is: ${ans}`)
             .setThumbnail('https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Math%20-%20%20Multi.png')
-          message.channel.send(MultiAnswer)
+          message.channel.send({embed: MultiAnswer})
         }
       } else if (op === 'div') {
         if (!args[1] || !args[2]) {
@@ -74,7 +74,7 @@ module.exports = {
             .setAuthor(`stationBot ${botVer}`, 'https://user-images.githubusercontent.com/81704775/118518156-d919d380-b705-11eb-9145-bb282e626d3a.png')
             .setDescription(`Your Answer is: ${ans}`)
             .setThumbnail('https://raw.githubusercontent.com/stationaryStation/StationBot/Next/Embeds/Bot%20Math%20-%20%20Div.png')
-          message.channel.send(DivAnswer)
+          message.channel.send({embed: DivAnswer})
         }
       } else if (op === 'mod') {
         if (!args[1] || !args[2]) {
