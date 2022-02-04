@@ -5,21 +5,23 @@ module.exports = {
   usage: '<url>',
   cooldown: 180,
   wip: true,
-  async execute (message, args, client) {
+  async execute(message, args, client) {
     // Create a async function called setPicture
-    async function setPicture (picturePath) {
-      await client.user.setAvatar(picturePath).then(() => console.log('Avatar set!'))
+    async function setPicture(picturePath) {
+      await client.user
+        .setAvatar(picturePath)
+        .then(() => console.log('Avatar set!'));
     }
-    const url = args.join(' ')
+    const url = args.join(' ');
     if (!url || !picturePath) {
-      message.channel.send('You didn\'t set an url!')
-      return false
+      message.channel.send("You didn't set an url!");
+      return false;
     } else {
       try {
-        setPicture(url)
+        setPicture(url);
       } catch (error) {
-        message.channel.send(`\`\`\`${error}\`\`\``)
+        message.channel.send(`\`\`\`${error}\`\`\``);
       }
     }
-  }
-}
+  },
+};

@@ -5,14 +5,16 @@ module.exports = {
   usage: '<name%>',
   cooldown: 10,
   wip: true,
-  execute (message, args) {
-    const rollName = args[0]
+  execute(message, args) {
+    const rollName = args[0];
     if (!rollName) {
-      const result = Math.floor((Math.random() * 100) + 1)
-      message.channel.send(`You rolled: ${result}`)
+      const result = Math.floor(Math.random() * 100 + 1);
+      message.channel.send(`You rolled: ${result}`);
     } else {
-      const result = Math.floor((Math.random() * 100) + 1)
-      message.channel.send(`***${rollName}%***\n You rolled: ${result} `) // Sends the results
+      const result = Math.floor(Math.random() * 100 + 1);
+      message.channel.send(
+        `***${rollName}%***\n You rolled: ${result} `,
+      ); // Sends the results
     }
-  }
-}
+  },
+};

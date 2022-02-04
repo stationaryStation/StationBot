@@ -4,7 +4,9 @@ module.exports = {
   cooldown: 5,
   args: false,
   wip: false,
-  execute (message) {
-    message.channel.send('Report a bug or issue here: https://github.com/stationaryStation/stationBot/issues')
-  }
-}
+  execute(message) {
+    message.channel.send(
+      'Report a bug or issue here: https://github.com/stationaryStation/stationBot/issues',
+    );
+  },
+};

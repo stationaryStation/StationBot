@@ -4,8 +4,8 @@ module.exports = {
   cooldown: 3,
   args: false,
   wip: false,
-  execute (message) {
-    const timeTaken = Date.now() - message.createdTimestamp
-    message.reply(`Your current ping is ${timeTaken}ms`)
-  }
-}
+  execute(message) {
+    const timeTaken = Date.now() - message.createdTimestamp;
+    message.reply(`Your current ping is ${timeTaken}ms`);
+  },
+};

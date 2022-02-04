@@ -4,12 +4,12 @@ module.exports = {
   description: 'Test Description',
   cooldown: 10,
   wip: true,
-  execute (message, args) {
-    const test = args[0]
+  execute(message, args) {
+    const test = args[0];
     if (test) {
-      message.channel.send(`Argument: ${test}`)
+      message.channel.send(`Argument: ${test}`);
     } else {
-      message.channel.send('No Arguments.')
+      message.channel.send('No Arguments.');
     }
-  }
-}
+  },
+};

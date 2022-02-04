@@ -5,8 +5,8 @@ module.exports = {
   cooldown: 20,
   wip: false,
   // eslint-disable-next-line no-unused-vars
-  execute (message, args) {
-    const nick = message.author
-    message.member.setNickname(nick)
-  }
-}
+  execute(message, args) {
+    const nick = message.author;
+    message.member.setNickname(nick);
+  },
+};

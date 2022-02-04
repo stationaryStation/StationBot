@@ -1,7 +1,9 @@
 module.exports = {
-  name: "message",
+  name: 'message',
   once: false,
   execute(message) {
-    console.log(`${message.author.tag} @ ${message.guild} | ${message.content}`)
-  }
-}
+    console.log(
+      `${message.author.tag} @ ${message.guild} | ${message.content}`,
+    );
+  },
+};
