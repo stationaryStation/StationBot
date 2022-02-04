@@ -11,7 +11,7 @@ module.exports = {
     const url = args[0];
     const content_to_fetch = args[1];
     // Fetch url and content
-    const { file } = await fetch(url, {
+    await fetch(url, {
       method: 'GET',
       body: JSON.stringify(content_to_fetch),
       headers: { 'Content-Type': 'application/json' },

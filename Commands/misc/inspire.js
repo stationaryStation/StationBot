@@ -1,3 +1,4 @@
+const fetch = require("node-fetch")
 module.exports = {
   name: 'inspire',
   args: false,
@@ -5,9 +6,9 @@ module.exports = {
   cooldown: 10,
   wip: false,
   execute(message) {
-    function GetQuote() {
+    async function GetQuote() {
       return (
-        fetch('https://zenquotes.io/api/random')
+        await fetch('https://zenquotes.io/api/random')
           // Get A quote from zenquotes.io and send data to a json file.
           .then((res) => {
             return res.json();

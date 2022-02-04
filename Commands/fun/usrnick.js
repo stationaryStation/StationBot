@@ -12,10 +12,6 @@ module.exports = {
     const newNickname = args[2];
     if (mode === 'show') {
       message.channel.send(`${user}'s Nickname:\n ${user.nickname}`);
-    } else if (mode === 'show' && !user) {
-      message.channel.send(
-        `Your nickname:\n ${message.user.nickname}`,
-      );
     } else if (mode === 'change') {
       if (!user) {
         message.channel.send(

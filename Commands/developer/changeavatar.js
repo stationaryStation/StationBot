@@ -7,6 +7,7 @@ module.exports = {
   wip: true,
   async execute(message, args, client) {
     // Create a async function called setPicture
+    const picturePath = args[0];
     async function setPicture(picturePath) {
       await client.user
         .setAvatar(picturePath)
