@@ -4,19 +4,18 @@
   "description": "Bot for stationaryStation's Servers",
   "main": "index.js",
   "scripts": {
-    "test": "node ."
+    "start": "node ."
   },
   "author": "stationaryStation",
   "license": "ISC",
   "dependencies": {
-    "@discordjs/opus": "^0.5.3",
-    "@discordjs/voice": "^0.7.5",
     "discord-math": "^1.0.5",
     "discord.js": "^12.5.3",
     "discord.js-12": "^1.0.2",
     "leo-profanity": "^1.5.0",
     "mathjs": "^9.4.1",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "prettier": "^2.5.1"
   },
   "devDependencies": {
     "eslint": "^7.26.0"

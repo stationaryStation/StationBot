@@ -112,14 +112,14 @@ client.on('message', async message => {
     .trim()
     .split(/ +/)
   const command = args.shift().toLowerCase()
-  /*
- cooldowns are set with:
-   module.exports = {
+/*
+cooldowns are set with:
+  module.exports = {
    //..
-   cooldown: <cooldown time (in seconds)>,
+    cooldown: <cooldown time (in seconds)>,
    //..
- }
- on the command file (BEFORE THE EXECUTE FUNCTION).
+}
+on the command file (BEFORE THE EXECUTE FUNCTION).
 */
   if (!client.commands.has(command)) return
   const { cooldowns } = client
@@ -127,7 +127,7 @@ client.on('message', async message => {
   if (!cooldowns.has(command.name)) {
     cooldowns.set(command.name, new Discord.Collection())
   }
-  // cooldown system (Not working to this moment)
+  // cooldown system
   const now = Date.now()
   const timestamps = cooldowns.get(command.name)
   const cooldownAmount = (command.cooldown || 3) * 1000
