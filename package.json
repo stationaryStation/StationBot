@@ -9,6 +9,7 @@
   "author": "stationaryStation",
   "license": "ISC",
   "dependencies": {
+    "@types/node": "^17.0.14",
     "discord-math": "^1.0.5",
     "discord.js": "^12.5.3",
     "discord.js-12": "^1.0.2",

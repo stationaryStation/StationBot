@@ -1,3 +1,5 @@
+// I recomend configuring this for your own code style
+// but you can use it as is if you want
 module.exports = {
   env: {
     commonjs: true,
