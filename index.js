@@ -81,7 +81,7 @@ const isPreRelease = config.PreRelease;
 // Create cooldowns + commands.
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
-const commandFolders = fs.readdirSync('./Commands');
+const commandFolders = fs.readdirSync('./commands');
 const eventFiles = fs
   .readdirSync('./events')
   .filter((file) => file.endsWith('.js'));
@@ -89,10 +89,10 @@ const eventFiles = fs
 // Search for commands on the commands folder (aka ./Commands/)
 for (const folder of commandFolders) {
   const commandFiles = fs
-    .readdirSync(`./Commands/${folder}`)
+    .readdirSync(`./commands/${folder}`)
     .filter((file) => file.endsWith('.js'));
   for (const file of commandFiles) {
-    const command = require(`./Commands/${folder}/${file}`);
+    const command = require(`./commands/${folder}/${file}`);
     client.commands.set(command.name, command);
   }
 }
@@ -169,7 +169,7 @@ on the command file (BEFORE THE EXECUTE FUNCTION).
   } catch (error) {
     // else if the command returns an error, notify the user.
     console.error(
-      `There was an error while running ${command}.\nError Stack:{$error}`,
+      `There was an error while running ${command}.\nError Stack:${error}`,
     );
     message.reply(
       'There was an error trying to execute that command!',
