@@ -1,3 +1,4 @@
+const Discord = require('discord.js')
 module.exports = {
   name: 'ping',
   description: 'Tells the User his ping with an embed',
@@ -6,6 +7,10 @@ module.exports = {
   wip: false,
   execute(message) {
     const timeTaken = Date.now() - message.createdTimestamp;
-    message.reply(`Your current ping is ${timeTaken}ms`);
+    const pingEmbed = new Discord.MessageEmbed()
+      .setTitle('Ping')
+      .setDescription(`Your current ping is ${timeTaken}ms`);
+
+    message.reply({embed: pingEmbed});
   },
 };
